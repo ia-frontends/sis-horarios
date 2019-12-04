@@ -1,0 +1,50 @@
+.ap-footer {
+	.ap-ft {
+		&-area {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1.6em 1em;
+			z-index: 4;
+
+			@include below(760px) {
+				font-size: 0.68em;
+			}
+			@include above(760px) {
+				justify-content: space-around;
+			}
+
+			&--home {
+				flex-direction: column;
+
+				.ap-ft-logo {
+					margin-bottom: 1em;
+					display: block;
+				}
+			}
+		}
+
+		&-logo {
+			max-width: 8em;
+			width: 100%;
+			display: none;
+			height: 2em;
+
+			.icon {
+				fill: #fff;
+			}
+
+			@include above(760px) {
+				display: block;
+			}
+		}
+	}
+
+	.ap-txt--link {
+		color: #b1deff;
+		font-weight: 400;
+		text-decoration: underline;
+	}
+}

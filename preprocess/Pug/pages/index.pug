@@ -1,0 +1,31 @@
+extend ../layout/_layout
+
+block content
+	- var $home = true;
+
+	section.ap-sis.ap-sis-home
+		.ap-sis-area
+			header.ap-sis-head
+				.ap-sis-panel
+					h1.ap-sis-t
+						svg.icon
+							use(xlink:href="#logo-ia-white")
+
+					h2.ap-sis-tt
+						| Sistema de Horarios
+
+				nav.ap-sis-head-navigation
+					a.ap-btn--actividades.ap-btn.ap-btn--blue(href="#")
+						| Actividades
+
+					a.ap-btn--directorio.ap-btn.ap-btn--blue(href="#")
+						| Directorio
+
+					a.ap-btn--confluence.ap-btn.ap-btn--blue(href="#")
+						| Confluence
+
+					a.ap-btn--bitacora.ap-btn.ap-btn--red(href="#")
+						| Bitácora
+
+					a.ap-btn--salir.ap-btn.ap-btn--red(href="#")
+						| Salir

@@ -1,0 +1,18 @@
+.ap-sis {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	&-area {
+		width: 90%;
+		margin: 0 auto;
+
+		@include above(1000px) {
+			max-width: 960px;
+		}
+	}
+
+	&-panel {
+		padding: 1em;
+	}
+}

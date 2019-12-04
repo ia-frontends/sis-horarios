@@ -1,0 +1,142 @@
+.ap-user {
+	position: absolute;
+	top: 40px;
+	left: 20px;
+	text-align: center;
+	z-index: 4;
+
+	@include above(760px) {
+		top: 60px;
+		left: 60px;
+	}
+
+	&-duend {
+		width: 3em;
+		height: 3em;
+		margin: 0 auto 0.6em;
+		border: 2px solid #fff;
+		overflow: hidden;
+		border-radius: 10em;
+		opacity: 0;
+
+		.cinepolo-head {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+
+		.st0 {
+			fill: #2d368f;
+		}
+		.st1 {
+			fill: url(#SVGID_1_);
+		}
+		.st2 {
+			fill: #28abe2;
+		}
+		.st3 {
+			fill: url(#SVGID_2_);
+		}
+		.st4 {
+			fill: #1c94d2;
+		}
+		.st5 {
+			fill: #fdd4bc;
+		}
+		.st6 {
+			fill: #fab68a;
+		}
+		.st7 {
+			opacity: 0.3;
+			fill: url(#SVGID_3_);
+			enable-background: new;
+		}
+		.st8 {
+			fill: #fdd9c5;
+		}
+		.st9 {
+			opacity: 0.3;
+			fill: url(#SVGID_4_);
+			enable-background: new;
+		}
+		.st10 {
+			fill: url(#SVGID_5_);
+		}
+		.st11 {
+			fill: #ea2128;
+		}
+		.st12 {
+			fill: #ffffff;
+		}
+		.st13 {
+			fill: #6c1a21;
+		}
+		.st14 {
+			fill: #ec3e58;
+		}
+		.st15 {
+			fill: #76b743;
+		}
+		.st16 {
+			fill: #80ae41;
+		}
+		.st17 {
+			fill: #ce202a;
+		}
+		.st18 {
+			opacity: 0.3;
+			fill: #6c1a21;
+			enable-background: new;
+		}
+		.st19 {
+			opacity: 0.3;
+			fill: #b75836;
+			enable-background: new;
+		}
+		.st20 {
+			fill: #7f5e2c;
+		}
+	}
+
+	&-name {
+		font-weight: 700;
+		color: #fff;
+		font-size: 0.6em;
+		opacity: 0;
+		transform: translateY(10px);
+		width: 6.6em;
+	}
+
+	// Logout
+	&-logout {
+		position: absolute;
+		top: 34px;
+		right: 20px;
+		font-size: 16px;
+		text-align: center;
+		z-index: 4;
+		opacity: 0;
+		transform: translateY(-10px);
+		pointer-events: none;
+
+		@include above(760px) {
+			top: 55px;
+			right: 50px;
+		}
+
+		.ap-btn {
+			font-size: 1.2em;
+			height: 2.6em;
+			line-height: 1.5em;
+			text-align: center;
+			transition: 0.3s all;
+			width: 2.6em;
+			background: none;
+			box-shadow: none;
+			padding: 0.2em;
+
+			.icon {
+				fill: #fff;
+			}
+		}
+	}
+}

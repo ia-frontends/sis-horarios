@@ -1,0 +1,43 @@
+.ap-sis {
+	&-head {
+		background-color: $red;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+
+		&-navigation {
+			background-color: $base;
+			padding: .4em 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+
+
+			.ap-btn {
+				margin-right: .2em;
+
+				&:first-child, &:last-child {
+					margin: 0;
+				}
+				&--actividades, &--confluence {
+					@include below(760px) {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	&-t {
+		height: 2em;
+    width: 10em;
+    margin: 0 auto;
+	}
+
+	&-tt {
+		color: #fff;
+		font-size: 1.8em;
+		display: block;
+		margin-top: 0.5em;
+	}
+}

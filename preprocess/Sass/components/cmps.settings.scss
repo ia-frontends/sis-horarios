@@ -1,0 +1,42 @@
+// Colors
+$base: #333F5D;
+$baseLgt: #212b43;
+$green: #00cf77;
+$greenDrk: #003519;
+$fontBase: #707070;
+$fontSubase: #2a2a2a;
+$fugas: #5d73a5;
+$red: #ff3f26;
+$redDrk: #c10303;
+
+// Modal Bg
+$topBlue: #00265f;
+$botBlue: #007fdf;
+
+// C Gradient
+$centerBlue: #2456ef;
+$outsideBlue: #001d73;
+
+// Fonts
+$baseFont: "Verdana", sans-serif;
+$readFont: "Open Sans", sans-serif;
+
+// $btnGrad: $base, $baseLgt;
+// $linGrad: $topBlue, $botBlue;
+// $fugGrad: rgba($fugas, 0), $fugas;
+// $btnGradHov: $base, #ff0001;
+
+@mixin gradient($direction, $list) {
+	background: linear-gradient($direction, $list);
+}
+
+@mixin horizontal-gradient($from, $to, $stop: 100%) {
+	background-color: $from;
+	background: linear-gradient(to right, $from 0%, $to $stop);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 );
+}
+
+@mixin radial-gradient($from, $to) {
+	background: radial-gradient(farthest-corner, $from 0%, $to 100%);
+	background-color: $from;
+}
