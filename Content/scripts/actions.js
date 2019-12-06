@@ -1,4 +1,5 @@
-var $entryTime = "";
+var $entryTime = "",
+	$workday = "";
 
 function docHeight() {
 	var $globalHeight = $(window).height();
@@ -45,18 +46,82 @@ function today() {
 	$(".ap-clock-second").html(":" + $secs);
 	$(".ap-clock-timearound").html($timearound);
 
-	$entryTime = "" + $hours + ":" + $mins + ":" + $secs + "" + $timearound + "";
+	$entryTime = "" + $hours + ":" + $mins + ":" + $secs + "";
 
 	return $entryTime;
 }
 
-function dateRegistre() {
-	today();
+function dateRegistre(id) {
+	var $id = id;
 
-	$("#ctl00_cphContenido_btnEntrada").on("click", function(e) {
+	today(); // Hoy es
+
+	$($id).on("click", function(e) {
 		e.preventDefault();
-		console.log($entryTime);
+
+		var $this = $(this),
+			$parent = $this.closest(".ap-sis-timesheet"),
+			$closestParent = $parent.next();
+
+		// Print Data
+		$(".ap-sis-userentry").html($entryTime);
+		sumTime();
+
+		animBasicOut(".ap-clock", function() {
+			$parent.addClass("ap-hide");
+			$closestParent.removeClass("ap-hide");
+			animBasicEn(".ap-sis-data");
+		});
 	});
+}
+
+function workingTime() {
+	var $timeWeek = "08:30:00",
+		$timeFrid = "06:00:00",
+		$week = new Date();
+
+	if ($week.getDay() !== 5) {
+		// Working time 8:30 hrs
+		$workday = $timeWeek;
+		return $workday;
+	} else if ($week.getDay() == 5) {
+		// Working time 6:00 hrs
+		$workday = $timeFrid;
+		return $workday;
+	}
+}
+
+function sumTime() {
+	function timestrToSec(timestr) {
+		var parts = timestr.split(":");
+		return parts[0] * 3600 + parts[1] * 60 + +parts[2];
+	}
+
+	function pad(num) {
+		if (num < 10) {
+			return "0" + num;
+		} else {
+			return "" + num;
+		}
+	}
+
+	function formatTime(seconds) {
+		return [
+			pad(Math.floor(seconds / 3600)),
+			pad(Math.floor(seconds / 60) % 60),
+			pad(seconds % 60)
+		].join(":");
+	}
+
+	// Worktime
+	workingTime();
+
+	var $iddleTime = $entryTime,
+		$wDay = $workday;
+
+	var $en = formatTime(timestrToSec($iddleTime) + timestrToSec($wDay));
+
+	$(".ap-sis-userout").html($en);
 }
 
 function entryClock() {
@@ -67,5 +132,5 @@ function entryClock() {
 $(function() {
 	docHeight();
 	entryClock();
-	dateRegistre();
+	dateRegistre("#ctl00_cphContenido_btnEntrada");
 });

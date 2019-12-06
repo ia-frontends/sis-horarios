@@ -2,6 +2,10 @@
 	&-clock {
 		text-align: center;
 
+		.ap-txt-clock {
+			font-size: 1.2em;
+		}
+
 		&-time {
 			display: flex;
 			flex-direction: row;

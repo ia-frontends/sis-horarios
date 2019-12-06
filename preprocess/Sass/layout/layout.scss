@@ -23,4 +23,12 @@
 			padding: 2em 4em;
 		}
 	}
+
+	&-data {
+		transform: translateY(-10px);
+		opacity: 0;
+	}
+}
+.ap-hide {
+	display: none;
 }

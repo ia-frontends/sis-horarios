@@ -34,7 +34,7 @@ const gulp = require("gulp"),
 	// Settings
 	filename = "master",
 	isNetcore = false, // True: will create files inside wwwroot || False: will create files inside Content.
-	isProduction = true, // True: will compress and add header to css and js files and optim images.
+	isProduction = false, // True: will compress and add header to css and js files and optim images.
 	headerName = "Sistema de Horarios " + new Date().getFullYear() + " ";
 
 // Sass Compiler
