@@ -52,6 +52,9 @@ const PATHS = {
 	vendors: {
 		src: "Preprocess/Vendors"
 	},
+	actions: {
+		src: "Preprocess/Actions"
+	},
 	outNetcore: "wwwroot/",
 	outMvc: "Content/"
 };
@@ -116,6 +119,33 @@ gulp.task("scripts", () => {
 		notify("Scripts converted to css and Ready :D")
 	);
 	return streamVendors;
+});
+
+gulp.task("actions", () => {
+	var streamActions = gulp
+		.src([PATHS.actions.src + "/*.js*"])
+		.on("error", console.log)
+		.pipe(plumber())
+		.pipe(concat("actions.js"))
+		.pipe(gulpif(isProduction, uglify()))
+		.pipe(
+			gulpif(isProduction, header(fileHeader("	" + headerName + " - Actions")))
+		);
+
+	if (isNetcore === true) {
+		streamActions = streamActions
+			.pipe(gulp.dest(PATHS.outNetcore + "scripts"))
+			.pipe(browserSync.stream());
+	} else {
+		streamActions = streamActions
+			.pipe(gulp.dest(PATHS.outMvc + "scripts"))
+			.pipe(browserSync.stream());
+	}
+
+	streamActions = streamActions.pipe(
+		notify("Scripts converted to css and Ready :D")
+	);
+	return streamActions;
 });
 
 // Pug
@@ -184,6 +214,7 @@ gulp.task("default", () => {
 	gulp.watch(PATHS.html.src + "/**/*.pug", gulp.series("pug"));
 	gulp.watch(PATHS.styles.src + "/**/*.scss", gulp.series("sass"));
 	gulp.watch(PATHS.vendors.src + "/*.js", gulp.series("scripts"));
+	gulp.watch(PATHS.actions.src + "/*.js", gulp.series("actions"));
 	gulp.watch("Preprocess/Html", gulp.series("prettifypages"));
 	gulp.watch("html").on("change", browserSync.reload);
 });

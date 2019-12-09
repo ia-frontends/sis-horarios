@@ -13,5 +13,8 @@ head
 			return resourcesPath + src + resourcesVersion;
 		};
 
-	link(href="/Content/css/master.css", rel="stylesheet", type="text/css")
-	link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i&display=swap",  rel="stylesheet")
+	block scripts
+			//- Scripts
+			script(src="/Content/scripts/jquery-3.3.1.min.js")
+			script(src="/Content/scripts/vendors.min.js")
+			script(src="/Content/scripts/actions.js")
