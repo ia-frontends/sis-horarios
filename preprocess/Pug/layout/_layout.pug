@@ -1,0 +1,16 @@
+doctype html
+html(lang="es-MX")
+	include _head
+
+	body.ap.ap--is-loading
+		main.ap-main
+			block content
+
+			block insideModals
+
+			//- Global modalboxes
+
+		//- SVG
+		include ../partials/part.master/part.svg.pug
+
+		block insideScripts

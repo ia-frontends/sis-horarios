@@ -1,0 +1,156 @@
+extend ../layout/_layout
+
+block content
+	div.mockup
+		link(rel="stylesheet", href="http://intranet.ia.com.mx/Estilos/Estilos.css")
+
+		div.mockup-web.
+			<table align="center" id="tblMain" style="margin-top: 105px;">
+				<tbody>
+					<tr valign="top">
+						<td>
+							<img id="ctl00_imgTop" src="http://intranet.ia.com.mx/Imagenes/banner.jpg" style="border-width:0px;">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="hidden" name="ctl00$cphMenu$hdnHorarioCorrido" id="ctl00_cphMenu_hdnHorarioCorrido" value="True">
+							<input type="hidden" name="ctl00$cphMenu$hdnPopupSlack" id="ctl00_cphMenu_hdnPopupSlack" value="false">
+							<input type="hidden" name="ctl00$cphMenu$hdnSlack" id="ctl00_cphMenu_hdnSlack">
+
+							<table style="width: 100%; background-color: #333F5D;" border="0" cellpadding="0" cellspacing="4">
+								<tbody>
+									<tr>
+										<td style="width: 82px;">
+											<a
+												id="ctl00_cphMenu_lnkActividades"
+												class="TextoBoton"
+												href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphMenu$lnkActividades&quot;, &quot;&quot;, false, &quot;&quot;, &quot;../_ACTIVIDADES/Inicio.aspx&quot;, false, true))"
+												style="color:White;">Actividades</a>
+										</td>
+										<td>&nbsp;</td>
+										<td style="width: 82px;">
+											<a
+												id="ctl00_cphMenu_LinkButton1"
+												class="TextoBoton"
+												href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphMenu$LinkButton1&quot;, &quot;&quot;, false, &quot;&quot;, &quot;Extensiones.aspx&quot;, false, true))"
+												style="color:White;">Directorio</a>
+										</td>
+										<td style="width: 110px">
+											<a
+												href="https://ia-interactive.atlassian.net/wiki/spaces/IA/overview"
+												class="TextoBoton"
+												style="color: white"
+												target="_blank">Confluence</a>
+										</td>
+										<td style="width: 93px;">
+											<input
+												type="image"
+												name="ctl00$cphMenu$btnBitacora"
+												id="ctl00_cphMenu_btnBitacora"
+												src="http://intranet.ia.com.mx/Imagenes/botones/bitacora.gif"
+												style="border-width:0px;">
+										</td>
+										<td style="width: 75px;">
+											<input
+												type="image"
+												name="ctl00$cphMenu$btnSalir"
+												id="ctl00_cphMenu_btnSalir"
+												src="http://intranet.ia.com.mx/Imagenes/botones/salir.gif"
+												style="border-width:0px;">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+							<script type="text/javascript" src="http://intranet.ia.com.mx/scripts/jquery-ui.multidatespicker.js"></script>
+							<script type="text/javascript" src="http://intranet.ia.com.mx/scripts/home-office.js"></script>
+
+
+							<link href="http://intranet.ia.com.mx/Estilos/jquery-ui-homeoffice.min.css" rel="stylesheet">
+							<link href="http://intranet.ia.com.mx/Estilos/jquery-ui-homeoffice.theme.css" rel="stylesheet">
+							<link href="http://intranet.ia.com.mx/Estilos/home-office.css" rel="stylesheet">
+						</td>
+					</tr>
+					<tr style="background-color:White;">
+						<td>
+							<div style="margin-left:15px; margin-right:15px; margin-top:30px; margin-bottom:30px;">
+								<table style="width: 100%;">
+									<tbody>
+										<tr>
+											<td>
+											<div id="ctl00_cphContenido_upnlHoraservidor">
+											<span id="ctl00_cphContenido_tmrHoraServidor" style="visibility:hidden;display:none;"></span>
+											<div style="text-align: left; margin-left: 10px;">
+											<span id="ctl00_cphContenido_lblReloj" class="TextoHora">12:07:17</span>
+											&nbsp;*Hora actual del servidor
+											</div>
+											</div>
+											<br>
+											<br>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: center;">
+												<span id="ctl00_cphContenido_lblNombre" class="textotitulos">
+												Diego Gutierréz Salgado</span>
+												&nbsp;
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: center;">
+												<br>
+												<input type="image" name="ctl00$cphContenido$btnEntrada" id="ctl00_cphContenido_btnEntrada" disabled="disabled" src="http://intranet.ia.com.mx/Imagenes/Botones/Entrada2.gif" style="border-width:0px;">
+												&nbsp;
+												&nbsp;
+												&nbsp;
+												<input type="image" name="ctl00$cphContenido$btnSalida" id="ctl00_cphContenido_btnSalida" src="http://intranet.ia.com.mx/Imagenes/botones/salida.gif" style="border-width:0px;">
+												<input type="submit" name="ctl00$cphContenido$btnSalidaConf" value="" id="ctl00_cphContenido_btnSalidaConf" style="visibility: hidden; width: 1px; height: 1px">
+												<br>
+												<br>
+												<span id="ctl00_cphContenido_lblError" style="color:Red;"></span>
+												<br>
+												<br>
+												<br>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<input id="mdp-calendar" style="float: right; position: relative; left: -232px; visibility: hidden" class="hasDatepicker">
+
+								<div class="container__remote">
+									<p class="switch__label">Estado</p>
+									<div class="switch switch-white">
+										<input type="radio" class="switch-input" name="view2" value="presencial" id="presencial" checked="">
+										<label for="presencial" class="switch-label switch-label-off">
+											<svg class="svg-icon" width="20px" height="11px" viewBox="0 0 20 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="trabajo-remoto-01" transform="translate(-674.000000, -512.000000)" fill-rule="nonzero"> <g id="Group-4" transform="translate(591.000000, 493.000000)"> <g id="Group-2" transform="translate(71.000000, 10.000000)"> <g id="switch"> <g id="Group-6" transform="translate(12.000000, 8.000000)"> <g id="office" transform="translate(0.000000, 1.000000)"> <path d="M15.8,10.12 L15.8,2.72 L4.2,2.72 L4.2,10.12 L4.2,10.52 L15.8,10.52 L15.8,10.12 Z M12.4,3.92 L12.4,4.32 L8.2,4.32 L8.2,4.92 L7.8,4.92 L7.8,3.92 L12.4,3.92 Z M5.6,4.32 L5.6,4.92 L5.2,4.92 L5.2,3.92 L6.8,3.92 L6.8,4.32 L5.6,4.32 Z M6.8,6.12 L6.8,6.52 L5.6,6.52 L5.6,7.12 L5.2,7.12 L5.2,6.12 L6.8,6.12 Z M14.6,3.92 L14.6,4.32 L13.4,4.32 L13.4,4.92 L13,4.92 L13,3.92 L14.6,3.92 Z M13,6.12 L14.6,6.12 L14.6,6.52 L13.4,6.52 L13.4,7.12 L13,7.12 L13,6.12 Z M7.6,6.12 L12.4,6.12 L12.4,10.12 L12,10.12 L12,6.52 L10.2,6.52 L10.2,10.12 L9.8,10.12 L9.8,6.52 L8,6.52 L8,10.12 L7.6,10.12 L7.6,6.12 Z" id="Shape" class="ico-office" fill="#333F5D"></path> <path d="M18.4,10.12 L18.4,9.106 L18.4,5.922 L18.8,5.922 L18.8,9 C19.4039811,8.75567783 19.7994951,8.16952611 19.8,7.518 C19.8,6.856 19.042,3.918 18.2,3.918 C17.358,3.918 16.6,6.856 16.6,7.518 C16.6007307,8.32377147 17.200548,9.00327886 18,9.104 L18,10.12 L18,10.52 L18.4,10.52 L18.4,10.12 Z M17.466,7.264 L17.748,6.982 L18,7.234 L18,7.8 L17.466,7.264 Z" id="Shape-Copy" class="tree" fill="#5AD58D"></path> <polygon id="Shape-Copy-4" class="tree" fill="#333F5D" points="15.8 10.12 15.8 10.52 20 10.52 20 10.12"></polygon> <path d="M2,10.12 L2,5.92 L2.4,5.92 L2.4,9 C3.00398113,8.75567783 3.39949511,8.16952611 3.4,7.518 C3.4,6.856 2.642,3.918 1.8,3.918 C0.958,3.918 0.2,6.856 0.2,7.518 C0.200730669,8.32377147 0.800548038,9.00327886 1.6,9.104 L1.6,10.12 L1.6,10.52 L2,10.52 L2,10.12 Z M1.066,7.264 L1.348,6.982 L1.6,7.234 L1.6,7.8 L1.066,7.264 Z" id="Shape-Copy-3" class="tree" fill="#5AD58D"></path> <polygon id="Shape-Copy-2" class="tree" fill="#333F5D" points="4.2 10.12 0 10.12 0 10.52 4.2 10.52"></polygon> <polygon id="Path" class="ico-office" fill="#333F5D" points="15.2 0.08 4.8 1.952 4.8 2.324 15.2 2.324"></polygon> </g> </g> </g> </g> </g> </g> </g> </svg>
+											Presencial
+										</label>
+										<input type="radio" class="switch-input" name="view2" value="remoto" id="remoto">
+										<label for="remoto" class="switch-label switch-label-on">
+											<svg class="svg-icon" width="23px" height="16px" viewBox="0 0 23 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="trabajo-remoto-02" transform="translate(-777.000000, -509.000000)" fill-rule="nonzero"> <g id="Group-4" transform="translate(591.000000, 493.000000)"> <g id="Group-2" transform="translate(72.000000, 10.000000)"> <g id="switch"> <g id="Group-5" transform="translate(114.000000, 6.000000)"> <g id="Group-3"> <g id="noun_House_26189-Copy-2"> <path d="M18.7836436,6.39755447 L20.5769111,6.39755447 L17.6234203,4.25340691 L17.6234203,1.56232456 L15.8653696,1.56232456 L15.8653696,2.97679627 L12.876662,0.80730976 L5.17684234,6.39755447 L6.96989513,6.39755447 L6.96989513,13.6099214 L5.80945713,13.6099214 L5.80945713,15.0074289 L19.9438668,15.0074289 L19.9438668,13.6099214 L18.7836436,13.6099214 L18.7836436,6.39755447 Z M11.8218745,10.2299632 L9.71229958,10.2299632 L9.71229958,8.12038831 L11.8218745,8.12038831 L11.8218745,10.2299632 Z M16.0410244,13.6756309 L13.9314494,13.6756309 L13.9314494,9.45648106 L16.0410244,9.45648106 L16.0410244,13.6756309 Z" id="Shape" class="ico-house" fill="#F4B393"></path> <polygon id="Path" class="pine" fill="#5AD58D" points="22.3618039 13.8759804 21.2254164 8.49209782 20.2084226 13.8759804 21.0742417 13.8759804 21.0742417 15.0074289 21.4961996 15.0074289 21.4961996 13.8759804"></polygon> <polygon id="Path-Copy" class="pine" fill="#5AD58D" points="5.15338125 12.5761973 2.51476936 1.00742892 0.153381245 12.5761973 2.16375221 12.5761973 2.16375221 15.0074289 3.14350889 15.0074289 3.14350889 12.5761973"></polygon> </g> </g> </g> </g> </g> </g> </g> </g> </svg>
+											Remoto
+										</label>
+										<span class="switch-selection"><span class="switch-selection-inner"></span></span>
+									</div>
+
+									<!-- BUTTON -->
+									<button id="calendar" class="remote__button">
+										<img class="button__img" src="http://intranet.ia.com.mx/Imagenes/calendar.svg" alt="calendar">
+										Mi calendario TR
+									</button>
+								</div>
+
+								<div class="remote__disclaimer">
+									<p class="disclaimer__txt">Puedes asignar tus días de trabajo remoto de manera anticipada desde el botón “Mi calendario TR”</p>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+	block insideScripts
+		script(src="")

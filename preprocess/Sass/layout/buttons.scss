@@ -1,0 +1,77 @@
+.ap {
+	&-btn {
+		border-radius: 0 0 6px 6px;
+		border: 1px solid transparent;
+		padding: 6px 8px;
+		display: block;
+		max-width: 115px;
+		width: 100%;
+		text-align: center;
+		font-weight: bold;
+		color: #FFF;
+		font-size: 12px;
+
+		// Colors
+		&--red {
+			background-color: $red;
+			transition: .30s ease-in;
+
+			&:hover {
+				background-color: $redDrk
+			}
+
+			&:active, &:focus {
+				background-color: $redDrk;
+				border-color: $red;
+			}
+
+			&.ap-btn {
+
+				&--hover {
+					background-color: $redDrk
+				}
+				&--pressed {
+					background-color: $redDrk;
+					border-color: $red;
+				}
+				&--disabled {
+					background-color: $redDrk;
+					color: #797979;
+					cursor: none;
+					pointer-events: none;
+				}
+			}
+		}
+
+		&--blue {
+			background-color: $base;
+			transition: .30s ease-in;
+
+			&:hover {
+				background-color: $baseLgt
+			}
+
+			&:active, &:focus {
+				background-color: $baseLgt;
+				border-color: #8da0cd;
+			}
+
+			&.ap-btn {
+
+				&--hover {
+					background-color: $baseLgt
+				}
+				&--pressed {
+					background-color: $baseLgt;
+					border-color: #8da0cd;
+				}
+				&--disabled {
+					background-color: $baseLgt;
+					color: #797979;
+					cursor: none;
+					pointer-events: none;
+				}
+			}
+		}
+	}
+}

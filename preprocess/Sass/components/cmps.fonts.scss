@@ -1,0 +1,34 @@
+$path: "../fonts/";
+
+// Text styles
+.ap {
+  &-t {
+  }
+  &-tt {
+    font-family: $baseFont;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  &-ttt {
+    font-family: $baseFont;
+    font-weight: normal;
+    font-size: 1.4em;
+  }
+  &-txt {
+    font-family: $readFont;
+    font-weight: normal;
+
+    &--strong {
+      font-weight: bold;
+    }
+    &--link {
+      text-decoration: underline;
+      font-weight: bold;
+      color: $fontBase;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

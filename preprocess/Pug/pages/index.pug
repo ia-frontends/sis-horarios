@@ -1,0 +1,83 @@
+extend ../layout/_layout
+
+block content
+	- var $home = true;
+
+	section.ap-sis.ap-sis-home
+		.ap-sis-area
+			header.ap-sis-head
+				.ap-sis-panel
+					h1.ap-sis-t
+						svg.icon
+							use(xlink:href="#logo-ia-white")
+
+					h2.ap-sis-tt
+						| Sistema de Horarios
+
+				nav.ap-sis-head-navigation
+					a.ap-btn--actividades.ap-btn.ap-btn--blue(href="#")
+						| Actividades
+
+					a.ap-btn--directorio.ap-btn.ap-btn--blue(href="#")
+						| Directorio
+
+					a.ap-btn--confluence.ap-btn.ap-btn--blue(href="#")
+						| Confluence
+
+					a.ap-btn--bitacora.ap-btn.ap-btn--red(href="#")
+						| Bitácora
+
+					a.ap-btn--salir.ap-btn.ap-btn--red(href="#")
+						| Salir
+
+			section.ap-sis-steps
+				article.ap-sis-timesheet
+					include ../partials/part.components/part.clock.pug
+
+					nav.ap-nav.ap-nav-entry
+						a.ap-btn.ap-btn--blue(href="#" id="ctl00_cphContenido_btnEntrada")
+							| Entrar
+
+				article.ap-sis-timesheet.ap-sis-timesheet--result.ap-hide
+					.ap-sis-data
+						.ap-sis-username Diego Gutiérrez
+						.ap-sis-userstate
+							svg.icon
+								use(xlink:href="#remoto")
+
+							p.ap-txt Remoto
+
+					.ap-sis-data
+						h3.ap-sis-ttt Hora de entrada
+						div.ap-sis-userentry
+
+					.ap-sis-data
+						h3.ap-sis-ttt Hora de salida
+						div.ap-sis-userout
+
+					.ap-sis-data
+						.ap-sis-iddle
+							p.ap-txt  ¿Saliste a comer?
+
+							div.ap-sis-iddle-toggle
+								<input id="chck" type="checkbox">
+								<label for="chck" class="check-trail">
+									<span class="check-handler"></span>
+								</label>
+
+							div.ap-sis-iddle.ap-hide
+								p.ap-txt ¿Cuánto tiempo?
+
+								ul.ap-sis-iddle-list
+									li.ap-sis-iddle-item
+
+									li.ap-sis-iddle-item
+
+									li.ap-sis-iddle-item
+
+									li.ap-sis-iddle-item
+
+
+
+
+

@@ -1,0 +1,18 @@
+footer.ap-footer
+	if $home
+		.ap-ft-area.ap-ft-area--home
+			a.ap-ft-logo(href="")
+				svg.icon
+						use(xlink:href="#lg-cinepolis")
+
+			a.ap-txt--link(href="https://static.cinepolis.com/resources/mx/documents/aviso-de-privacidad-cinepolis.pdf", target="_blank") Aviso de privacidad
+
+	else
+		.ap-ft-area
+			a.ap-txt--link.ap-mod(href="#ap-modal--terms") Bases y condiciones.
+
+			a.ap-ft-logo(href="/html/")
+				svg.icon
+						use(xlink:href="#lg-cinepolis")
+
+			a.ap-txt--link(href="https://static.cinepolis.com/resources/mx/documents/aviso-de-privacidad-cinepolis.pdf", target="_blank") Aviso de privacidad
