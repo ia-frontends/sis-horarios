@@ -123,10 +123,10 @@ gulp.task("scripts", () => {
 
 gulp.task("actions", () => {
 	var streamActions = gulp
-		.src([PATHS.actions.src + "/*.js*"])
+		.src([PATHS.vendors.src + "/*.js*", PATHS.actions.src + "/*.js*"])
 		.on("error", console.log)
 		.pipe(plumber())
-		.pipe(concat("actions.js"))
+		.pipe(concat("time-calculation.js"))
 		.pipe(gulpif(isProduction, uglify()))
 		.pipe(
 			gulpif(isProduction, header(fileHeader("	" + headerName + " - Actions")))
@@ -213,7 +213,6 @@ gulp.task("default", () => {
 
 	gulp.watch(PATHS.html.src + "/**/*.pug", gulp.series("pug"));
 	gulp.watch(PATHS.styles.src + "/**/*.scss", gulp.series("sass"));
-	gulp.watch(PATHS.vendors.src + "/*.js", gulp.series("scripts"));
 	gulp.watch(PATHS.actions.src + "/*.js", gulp.series("actions"));
 	gulp.watch("Preprocess/Html", gulp.series("prettifypages"));
 	gulp.watch("html").on("change", browserSync.reload);
