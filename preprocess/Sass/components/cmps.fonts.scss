@@ -2,33 +2,34 @@ $path: "../fonts/";
 
 // Text styles
 .ap {
-  &-t {
-  }
-  &-tt {
-    font-family: $baseFont;
-    font-weight: bold;
-    font-size: 2em;
-  }
-  &-ttt {
-    font-family: $baseFont;
-    font-weight: normal;
-    font-size: 1.4em;
-  }
-  &-txt {
-    font-family: $readFont;
-    font-weight: normal;
+	&-t {
+	}
+	&-tt {
+		font-family: $baseFont;
+		font-weight: bold;
+		font-size: 2em;
+	}
+	&-ttt {
+		font-family: $baseFont;
+		font-weight: normal;
+		font-size: 1.4em;
+	}
+	&-txt {
+		font-family: "Roboto", sans-serif;
+		font-weight: normal;
+		font-weight: 100;
 
-    &--strong {
-      font-weight: bold;
-    }
-    &--link {
-      text-decoration: underline;
-      font-weight: bold;
-      color: $fontBase;
+		&--strong {
+			font-weight: bold;
+		}
+		&--link {
+			text-decoration: underline;
+			font-weight: bold;
+			color: $fontBase;
 
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
 }

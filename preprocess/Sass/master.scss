@@ -5,52 +5,14 @@
 @import "./components/cmps.settings";
 @import "./components/cmps.fonts";
 
-body {
-	//   background: url("../img/bg-design-areas.png") no-repeat center;
-	color: #222;
-	background-color: $base;
-	font-family: $baseFont;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	overflow: hidden;
-
-	// small phones
-	@media only screen and (min-width: 320px) and (max-width: 480px) and (orientation: portrait) {
-		font-size: 12px;
-	}
-
-	// Macbook con Barra
-	@media screen and (min-width: 1200px) and (max-height: 700px) {
-		font-size: 13px;
-	}
-
-	// Cliente
-	@media screen and (min-width: 1366px) and (max-height: 760px) and (max-width: 1500px) {
-		font-size: 12px;
-	}
-
-	@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-		font-size: 14px;
-	}
-
-	@include above(2500px) {
-		font-size: 22px;
-	}
-}
-
 // Tools
-@import "./components/cmps.normalizer";
-@import "./components/cmps.scrollbar";
-@import "./components/cmps.clock";
+// @import "./components/cmps.normalizer";
 
 // Layout
 @import "./layout/layout";
 @import "./layout/buttons";
 @import "./layout/header";
-@import "./layout/footer";
 
 // Pages
 @import "./pages/ui-settings";
-@import "./pages/home";
-
-@import "./pages/home";
+@import "./pages/widget";
