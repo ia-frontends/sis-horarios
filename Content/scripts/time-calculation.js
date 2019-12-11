@@ -1,1066 +1,379 @@
-//  * circletype 2.3.0
-//  * A JavaScript library that lets you curve type on the web.
-//  * Copyright © 2014-2018 Peter Hrynkow
-//  * Licensed MIT
-//  * https://github.com/peterhry/CircleType#readme
+/**
+ * Arctext.js
+ * A jQuery plugin for curved text
+ * http://www.codrops.com
+ *
+ * Copyright 2011, Pedro Botelho / Codrops
+ * Free to use under the MIT license.
+ *
+ * Date: Mon Jan 23 2012
+ */
 
-!(function(t, e) {
-	"object" == typeof exports && "object" == typeof module
-		? (module.exports = e())
-		: "function" == typeof define && define.amd
-		? define([], e)
-		: "object" == typeof exports
-		? (exports.CircleType = e())
-		: (t.CircleType = e());
-})("undefined" != typeof self ? self : this, function() {
-	return (function(t) {
-		function e(r) {
-			if (n[r]) return n[r].exports;
-			var i = (n[r] = { i: r, l: !1, exports: {} });
-			return t[r].call(i.exports, i, i.exports, e), (i.l = !0), i.exports;
+(function($, undefined) {
+	/*!
+	 * FitText.js 1.0
+	 *
+	 * Copyright 2011, Dave Rupert http://daverupert.com
+	 * Released under the WTFPL license
+	 * http://sam.zoy.org/wtfpl/
+	 *
+	 * Date: Thu May 05 14:23:00 2011 -0600
+	 */
+	$.fn.fitText = function(kompressor, options) {
+		var settings = {
+			minFontSize: Number.NEGATIVE_INFINITY,
+			maxFontSize: Number.POSITIVE_INFINITY
+		};
+
+		return this.each(function() {
+			var $this = $(this); // store the object
+			var compressor = kompressor || 1; // set the compressor
+
+			if (options) {
+				$.extend(settings, options);
+			}
+
+			// Resizer() resizes items based on the object width divided by the compressor * 10
+			var resizer = function() {
+				$this.css(
+					"font-size",
+					Math.max(
+						Math.min(
+							$this.width() / (compressor * 10),
+							parseFloat(settings.maxFontSize)
+						),
+						parseFloat(settings.minFontSize)
+					)
+				);
+			};
+
+			// Call once to set.
+			resizer();
+
+			// Call on resize. Opera debounces their resize by default.
+			$(window).resize(resizer);
+		});
+	};
+
+	/*
+	 * Lettering plugin
+	 *
+	 * changed injector function:
+	 *   add &nbsp; for empty chars.
+	 */
+	function injector(t, splitter, klass, after) {
+		var a = t.text().split(splitter),
+			inject = "",
+			emptyclass;
+		if (a.length) {
+			$(a).each(function(i, item) {
+				emptyclass = "";
+				if (item === " ") {
+					emptyclass = " empty";
+					item = "&nbsp;";
+				}
+				inject +=
+					'<span class="' +
+					klass +
+					(i + 1) +
+					emptyclass +
+					'">' +
+					item +
+					"</span>" +
+					after;
+			});
+			t.empty().append(inject);
 		}
-		var n = {};
-		return (
-			(e.m = t),
-			(e.c = n),
-			(e.d = function(t, n, r) {
-				e.o(t, n) ||
-					Object.defineProperty(t, n, {
-						configurable: !1,
-						enumerable: !0,
-						get: r
-					});
-			}),
-			(e.n = function(t) {
-				var n =
-					t && t.__esModule
-						? function() {
-								return t.default;
-						  }
-						: function() {
-								return t;
-						  };
-				return e.d(n, "a", n), n;
-			}),
-			(e.o = function(t, e) {
-				return Object.prototype.hasOwnProperty.call(t, e);
-			}),
-			(e.p = ""),
-			e((e.s = 29))
-		);
-	})([
-		function(t, e, n) {
-			var r = n(24)("wks"),
-				i = n(12),
-				o = n(1).Symbol,
-				u = "function" == typeof o;
-			(t.exports = function(t) {
-				return r[t] || (r[t] = (u && o[t]) || (u ? o : i)("Symbol." + t));
-			}).store = r;
-		},
-		function(t, e) {
-			var n = (t.exports =
-				"undefined" != typeof window && window.Math == Math
-					? window
-					: "undefined" != typeof self && self.Math == Math
-					? self
-					: Function("return this")());
-			"number" == typeof __g && (__g = n);
-		},
-		function(t, e) {
-			var n = (t.exports = { version: "2.5.6" });
-			"number" == typeof __e && (__e = n);
-		},
-		function(t, e, n) {
-			var r = n(4),
-				i = n(11);
-			t.exports = n(6)
-				? function(t, e, n) {
-						return r.f(t, e, i(1, n));
-				  }
-				: function(t, e, n) {
-						return (t[e] = n), t;
-				  };
-		},
-		function(t, e, n) {
-			var r = n(5),
-				i = n(34),
-				o = n(35),
-				u = Object.defineProperty;
-			e.f = n(6)
-				? Object.defineProperty
-				: function(t, e, n) {
-						if ((r(t), (e = o(e, !0)), r(n), i))
-							try {
-								return u(t, e, n);
-							} catch (t) {}
-						if ("get" in n || "set" in n)
-							throw TypeError("Accessors not supported!");
-						return "value" in n && (t[e] = n.value), t;
-				  };
-		},
-		function(t, e, n) {
-			var r = n(10);
-			t.exports = function(t) {
-				if (!r(t)) throw TypeError(t + " is not an object!");
-				return t;
-			};
-		},
-		function(t, e, n) {
-			t.exports = !n(17)(function() {
-				return (
-					7 !=
-					Object.defineProperty({}, "a", {
-						get: function() {
-							return 7;
-						}
-					}).a
-				);
-			});
-		},
-		function(t, e) {
-			var n = {}.hasOwnProperty;
-			t.exports = function(t, e) {
-				return n.call(t, e);
-			};
-		},
-		function(t, e) {
-			var n = Math.ceil,
-				r = Math.floor;
-			t.exports = function(t) {
-				return isNaN((t = +t)) ? 0 : (t > 0 ? r : n)(t);
-			};
-		},
-		function(t, e) {
-			t.exports = function(t) {
-				if (void 0 == t) throw TypeError("Can't call method on  " + t);
-				return t;
-			};
-		},
-		function(t, e) {
-			t.exports = function(t) {
-				return "object" == typeof t ? null !== t : "function" == typeof t;
-			};
-		},
-		function(t, e) {
-			t.exports = function(t, e) {
-				return {
-					enumerable: !(1 & t),
-					configurable: !(2 & t),
-					writable: !(4 & t),
-					value: e
-				};
-			};
-		},
-		function(t, e) {
-			var n = 0,
-				r = Math.random();
-			t.exports = function(t) {
-				return "Symbol(".concat(
-					void 0 === t ? "" : t,
-					")_",
-					(++n + r).toString(36)
-				);
-			};
-		},
-		function(t, e) {
-			t.exports = {};
-		},
-		function(t, e, n) {
-			var r = n(24)("keys"),
-				i = n(12);
-			t.exports = function(t) {
-				return r[t] || (r[t] = i(t));
-			};
-		},
-		function(t, e) {
-			t.exports = !1;
-		},
-		function(t, e, n) {
-			var r = n(1),
-				i = n(2),
-				o = n(3),
-				u = n(19),
-				c = n(20),
-				f = function(t, e, n) {
-					var a,
-						s,
-						l,
-						p,
-						h = t & f.F,
-						d = t & f.G,
-						v = t & f.S,
-						y = t & f.P,
-						_ = t & f.B,
-						m = d ? r : v ? r[e] || (r[e] = {}) : (r[e] || {}).prototype,
-						g = d ? i : i[e] || (i[e] = {}),
-						x = g.prototype || (g.prototype = {});
-					d && (n = e);
-					for (a in n)
-						(s = !h && m && void 0 !== m[a]),
-							(l = (s ? m : n)[a]),
-							(p =
-								_ && s
-									? c(l, r)
-									: y && "function" == typeof l
-									? c(Function.call, l)
-									: l),
-							m && u(m, a, l, t & f.U),
-							g[a] != l && o(g, a, p),
-							y && x[a] != l && (x[a] = l);
-				};
-			(r.core = i),
-				(f.F = 1),
-				(f.G = 2),
-				(f.S = 4),
-				(f.P = 8),
-				(f.B = 16),
-				(f.W = 32),
-				(f.U = 64),
-				(f.R = 128),
-				(t.exports = f);
-		},
-		function(t, e) {
-			t.exports = function(t) {
-				try {
-					return !!t();
-				} catch (t) {
-					return !0;
-				}
-			};
-		},
-		function(t, e, n) {
-			var r = n(10),
-				i = n(1).document,
-				o = r(i) && r(i.createElement);
-			t.exports = function(t) {
-				return o ? i.createElement(t) : {};
-			};
-		},
-		function(t, e, n) {
-			var r = n(1),
-				i = n(3),
-				o = n(7),
-				u = n(12)("src"),
-				c = Function.toString,
-				f = ("" + c).split("toString");
-			(n(2).inspectSource = function(t) {
-				return c.call(t);
-			}),
-				(t.exports = function(t, e, n, c) {
-					var a = "function" == typeof n;
-					a && (o(n, "name") || i(n, "name", e)),
-						t[e] !== n &&
-							(a && (o(n, u) || i(n, u, t[e] ? "" + t[e] : f.join(String(e)))),
-							t === r
-								? (t[e] = n)
-								: c
-								? t[e]
-									? (t[e] = n)
-									: i(t, e, n)
-								: (delete t[e], i(t, e, n)));
-				})(Function.prototype, "toString", function() {
-					return ("function" == typeof this && this[u]) || c.call(this);
-				});
-		},
-		function(t, e, n) {
-			var r = n(36);
-			t.exports = function(t, e, n) {
-				if ((r(t), void 0 === e)) return t;
-				switch (n) {
-					case 1:
-						return function(n) {
-							return t.call(e, n);
-						};
-					case 2:
-						return function(n, r) {
-							return t.call(e, n, r);
-						};
-					case 3:
-						return function(n, r, i) {
-							return t.call(e, n, r, i);
-						};
-				}
-				return function() {
-					return t.apply(e, arguments);
-				};
-			};
-		},
-		function(t, e, n) {
-			var r = n(42),
-				i = n(9);
-			t.exports = function(t) {
-				return r(i(t));
-			};
-		},
-		function(t, e) {
-			var n = {}.toString;
-			t.exports = function(t) {
-				return n.call(t).slice(8, -1);
-			};
-		},
-		function(t, e, n) {
-			var r = n(8),
-				i = Math.min;
-			t.exports = function(t) {
-				return t > 0 ? i(r(t), 9007199254740991) : 0;
-			};
-		},
-		function(t, e, n) {
-			var r = n(2),
-				i = n(1),
-				o = i["__core-js_shared__"] || (i["__core-js_shared__"] = {});
-			(t.exports = function(t, e) {
-				return o[t] || (o[t] = void 0 !== e ? e : {});
-			})("versions", []).push({
-				version: r.version,
-				mode: n(15) ? "pure" : "global",
-				copyright: "© 2018 Denis Pushkarev (zloirock.ru)"
-			});
-		},
-		function(t, e) {
-			t.exports = "constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(
-				","
-			);
-		},
-		function(t, e, n) {
-			var r = n(4).f,
-				i = n(7),
-				o = n(0)("toStringTag");
-			t.exports = function(t, e, n) {
-				t &&
-					!i((t = n ? t : t.prototype), o) &&
-					r(t, o, { configurable: !0, value: e });
-			};
-		},
-		function(t, e, n) {
-			var r = n(9);
-			t.exports = function(t) {
-				return Object(r(t));
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var r = Math.PI / 180;
-			e.default = function(t) {
-				return t * r;
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			n(30);
-			var r = n(54),
-				i = (function(t) {
-					return t && t.__esModule ? t : { default: t };
-				})(r);
-			t.exports = i.default;
-		},
-		function(t, e, n) {
-			n(31), n(47), (t.exports = n(2).Array.from);
-		},
-		function(t, e, n) {
-			"use strict";
-			var r = n(32)(!0);
-			n(33)(
-				String,
-				"String",
-				function(t) {
-					(this._t = String(t)), (this._i = 0);
-				},
-				function() {
-					var t,
-						e = this._t,
-						n = this._i;
-					return n >= e.length
-						? { value: void 0, done: !0 }
-						: ((t = r(e, n)), (this._i += t.length), { value: t, done: !1 });
-				}
-			);
-		},
-		function(t, e, n) {
-			var r = n(8),
-				i = n(9);
-			t.exports = function(t) {
-				return function(e, n) {
-					var o,
-						u,
-						c = String(i(e)),
-						f = r(n),
-						a = c.length;
-					return f < 0 || f >= a
-						? t
-							? ""
-							: void 0
-						: ((o = c.charCodeAt(f)),
-						  o < 55296 ||
-						  o > 56319 ||
-						  f + 1 === a ||
-						  (u = c.charCodeAt(f + 1)) < 56320 ||
-						  u > 57343
-								? t
-									? c.charAt(f)
-									: o
-								: t
-								? c.slice(f, f + 2)
-								: u - 56320 + ((o - 55296) << 10) + 65536);
-				};
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			var r = n(15),
-				i = n(16),
-				o = n(19),
-				u = n(3),
-				c = n(13),
-				f = n(37),
-				a = n(26),
-				s = n(46),
-				l = n(0)("iterator"),
-				p = !([].keys && "next" in [].keys()),
-				h = function() {
-					return this;
-				};
-			t.exports = function(t, e, n, d, v, y, _) {
-				f(n, e, d);
-				var m,
-					g,
-					x,
-					b = function(t) {
-						if (!p && t in M) return M[t];
-						switch (t) {
-							case "keys":
-							case "values":
-								return function() {
-									return new n(this, t);
-								};
-						}
-						return function() {
-							return new n(this, t);
-						};
-					},
-					O = e + " Iterator",
-					w = "values" == v,
-					j = !1,
-					M = t.prototype,
-					S = M[l] || M["@@iterator"] || (v && M[v]),
-					P = S || b(v),
-					A = v ? (w ? b("entries") : P) : void 0,
-					T = "Array" == e ? M.entries || S : S;
-				if (
-					(T &&
-						(x = s(T.call(new t()))) !== Object.prototype &&
-						x.next &&
-						(a(x, O, !0), r || "function" == typeof x[l] || u(x, l, h)),
-					w &&
-						S &&
-						"values" !== S.name &&
-						((j = !0),
-						(P = function() {
-							return S.call(this);
-						})),
-					(r && !_) || (!p && !j && M[l]) || u(M, l, P),
-					(c[e] = P),
-					(c[O] = h),
-					v)
-				)
-					if (
-						((m = {
-							values: w ? P : b("values"),
-							keys: y ? P : b("keys"),
-							entries: A
-						}),
-						_)
-					)
-						for (g in m) g in M || o(M, g, m[g]);
-					else i(i.P + i.F * (p || j), e, m);
-				return m;
-			};
-		},
-		function(t, e, n) {
-			t.exports =
-				!n(6) &&
-				!n(17)(function() {
-					return (
-						7 !=
-						Object.defineProperty(n(18)("div"), "a", {
-							get: function() {
-								return 7;
-							}
-						}).a
-					);
-				});
-		},
-		function(t, e, n) {
-			var r = n(10);
-			t.exports = function(t, e) {
-				if (!r(t)) return t;
-				var n, i;
-				if (e && "function" == typeof (n = t.toString) && !r((i = n.call(t))))
-					return i;
-				if ("function" == typeof (n = t.valueOf) && !r((i = n.call(t))))
-					return i;
-				if (!e && "function" == typeof (n = t.toString) && !r((i = n.call(t))))
-					return i;
-				throw TypeError("Can't convert object to primitive value");
-			};
-		},
-		function(t, e) {
-			t.exports = function(t) {
-				if ("function" != typeof t) throw TypeError(t + " is not a function!");
-				return t;
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			var r = n(38),
-				i = n(11),
-				o = n(26),
-				u = {};
-			n(3)(u, n(0)("iterator"), function() {
-				return this;
-			}),
-				(t.exports = function(t, e, n) {
-					(t.prototype = r(u, { next: i(1, n) })), o(t, e + " Iterator");
-				});
-		},
-		function(t, e, n) {
-			var r = n(5),
-				i = n(39),
-				o = n(25),
-				u = n(14)("IE_PROTO"),
-				c = function() {},
-				f = function() {
-					var t,
-						e = n(18)("iframe"),
-						r = o.length;
-					for (
-						e.style.display = "none",
-							n(45).appendChild(e),
-							e.src = "javascript:",
-							t = e.contentWindow.document,
-							t.open(),
-							t.write("<script>document.F=Object</script>"),
-							t.close(),
-							f = t.F;
-						r--;
+	}
 
-					)
-						delete f.prototype[o[r]];
-					return f();
-				};
-			t.exports =
-				Object.create ||
-				function(t, e) {
-					var n;
-					return (
-						null !== t
-							? ((c.prototype = r(t)),
-							  (n = new c()),
-							  (c.prototype = null),
-							  (n[u] = t))
-							: (n = f()),
-						void 0 === e ? n : i(n, e)
-					);
-				};
+	var methods = {
+		init: function() {
+			return this.each(function() {
+				injector($(this), "", "char", "");
+			});
 		},
-		function(t, e, n) {
-			var r = n(4),
-				i = n(5),
-				o = n(40);
-			t.exports = n(6)
-				? Object.defineProperties
-				: function(t, e) {
-						i(t);
-						for (var n, u = o(e), c = u.length, f = 0; c > f; )
-							r.f(t, (n = u[f++]), e[n]);
-						return t;
-				  };
+
+		words: function() {
+			return this.each(function() {
+				injector($(this), " ", "word", " ");
+			});
 		},
-		function(t, e, n) {
-			var r = n(41),
-				i = n(25);
-			t.exports =
-				Object.keys ||
-				function(t) {
-					return r(t, i);
-				};
+
+		lines: function() {
+			return this.each(function() {
+				var r = "eefec303079ad17405c889e092e105b0";
+				// Because it's hard to split a <br/> tag consistently across browsers,
+				// (*ahem* IE *ahem*), we replaces all <br/> instances with an md5 hash
+				// (of the word "split").  If you're trying to use this plugin on that
+				// md5 hash string, it will fail because you're being ridiculous.
+				injector(
+					$(this)
+						.children("br")
+						.replaceWith(r)
+						.end(),
+					r,
+					"line",
+					""
+				);
+			});
+		}
+	};
+
+	$.fn.lettering = function(method) {
+		// Method calling logic
+		if (method && methods[method]) {
+			return methods[method].apply(this, [].slice.call(arguments, 1));
+		} else if (method === "letters" || !method) {
+			return methods.init.apply(this, [].slice.call(arguments, 0)); // always pass an array
+		}
+		$.error("Method " + method + " does not exist on jQuery.lettering");
+		return this;
+	};
+
+	/*
+	 * Arctext object.
+	 */
+	$.Arctext = function(options, element) {
+		this.$el = $(element);
+		this._init(options);
+	};
+
+	$.Arctext.defaults = {
+		radius: 0, // the minimum value allowed is half of the word length. if set to -1, the word will be straight.
+		dir: 1, // 1: curve is down, -1: curve is up.
+		rotate: true, // if true each letter will be rotated.
+		fitText: false // if you wanna try out the fitText plugin (http://fittextjs.com/) set this to true. Don't forget the wrapper should be fluid.
+	};
+
+	$.Arctext.prototype = {
+		_init: function(options) {
+			this.options = $.extend(true, {}, $.Arctext.defaults, options);
+
+			// apply the lettering plugin.
+			this._applyLettering();
+
+			this.$el.data("arctext", true);
+
+			// calculate values
+			this._calc();
+
+			// apply transformation.
+			this._rotateWord();
+
+			// load the events
+			this._loadEvents();
 		},
-		function(t, e, n) {
-			var r = n(7),
-				i = n(21),
-				o = n(43)(!1),
-				u = n(14)("IE_PROTO");
-			t.exports = function(t, e) {
-				var n,
-					c = i(t),
-					f = 0,
-					a = [];
-				for (n in c) n != u && r(c, n) && a.push(n);
-				for (; e.length > f; ) r(c, (n = e[f++])) && (~o(a, n) || a.push(n));
-				return a;
-			};
+		_applyLettering: function() {
+			this.$el.lettering();
+
+			if (this.options.fitText) this.$el.fitText();
+
+			this.$letters = this.$el.find("span").css("display", "inline-block");
 		},
-		function(t, e, n) {
-			var r = n(22);
-			t.exports = Object("z").propertyIsEnumerable(0)
-				? Object
-				: function(t) {
-						return "String" == r(t) ? t.split("") : Object(t);
-				  };
+		_calc: function() {
+			if (this.options.radius === -1) return false;
+
+			// calculate word / arc sizes & distances.
+			this._calcBase();
+
+			// get final values for each letter.
+			this._calcLetters();
 		},
-		function(t, e, n) {
-			var r = n(21),
-				i = n(23),
-				o = n(44);
-			t.exports = function(t) {
-				return function(e, n, u) {
-					var c,
-						f = r(e),
-						a = i(f.length),
-						s = o(u, a);
-					if (t && n != n) {
-						for (; a > s; ) if ((c = f[s++]) != c) return !0;
-					} else
-						for (; a > s; s++)
-							if ((t || s in f) && f[s] === n) return t || s || 0;
-					return !t && -1;
-				};
-			};
+		_calcBase: function() {
+			// total word width (sum of letters widths)
+			this.dtWord = 0;
+
+			var _self = this;
+
+			this.$letters.each(function(i) {
+				var $letter = $(this),
+					letterWidth = $letter.outerWidth(true);
+
+				_self.dtWord += letterWidth;
+
+				// save the center point of each letter:
+				$letter.data("center", _self.dtWord - letterWidth / 2);
+			});
+
+			// the middle point of the word.
+			var centerWord = this.dtWord / 2;
+
+			// check radius : the minimum value allowed is half of the word length.
+			if (this.options.radius < centerWord) this.options.radius = centerWord;
+
+			// total arc segment length, where the letters will be placed.
+			this.dtArcBase = this.dtWord;
+
+			// calculate the arc (length) that goes from the beginning of the first letter (x=0) to the end of the last letter (x=this.dtWord).
+			// first lets calculate the angle for the triangle with base = this.dtArcBase and the other two sides = radius.
+			var angle = 2 * Math.asin(this.dtArcBase / (2 * this.options.radius));
+
+			// given the formula: L(ength) = R(adius) x A(ngle), we calculate our arc length.
+			this.dtArc = this.options.radius * angle;
 		},
-		function(t, e, n) {
-			var r = n(8),
-				i = Math.max,
-				o = Math.min;
-			t.exports = function(t, e) {
-				return (t = r(t)), t < 0 ? i(t + e, 0) : o(t, e);
-			};
-		},
-		function(t, e, n) {
-			var r = n(1).document;
-			t.exports = r && r.documentElement;
-		},
-		function(t, e, n) {
-			var r = n(7),
-				i = n(27),
-				o = n(14)("IE_PROTO"),
-				u = Object.prototype;
-			t.exports =
-				Object.getPrototypeOf ||
-				function(t) {
-					return (
-						(t = i(t)),
-						r(t, o)
-							? t[o]
-							: "function" == typeof t.constructor && t instanceof t.constructor
-							? t.constructor.prototype
-							: t instanceof Object
-							? u
-							: null
-					);
-				};
-		},
-		function(t, e, n) {
-			"use strict";
-			var r = n(20),
-				i = n(16),
-				o = n(27),
-				u = n(48),
-				c = n(49),
-				f = n(23),
-				a = n(50),
-				s = n(51);
-			i(
-				i.S +
-					i.F *
-						!n(53)(function(t) {
-							Array.from(t);
-						}),
-				"Array",
-				{
-					from: function(t) {
-						var e,
-							n,
-							i,
-							l,
-							p = o(t),
-							h = "function" == typeof this ? this : Array,
-							d = arguments.length,
-							v = d > 1 ? arguments[1] : void 0,
-							y = void 0 !== v,
-							_ = 0,
-							m = s(p);
-						if (
-							(y && (v = r(v, d > 2 ? arguments[2] : void 0, 2)),
-							void 0 == m || (h == Array && c(m)))
-						)
-							for (e = f(p.length), n = new h(e); e > _; _++)
-								a(n, _, y ? v(p[_], _) : p[_]);
-						else
-							for (l = m.call(p), n = new h(); !(i = l.next()).done; _++)
-								a(n, _, y ? u(l, v, [i.value, _], !0) : i.value);
-						return (n.length = _), n;
-					}
-				}
-			);
-		},
-		function(t, e, n) {
-			var r = n(5);
-			t.exports = function(t, e, n, i) {
-				try {
-					return i ? e(r(n)[0], n[1]) : e(n);
-				} catch (e) {
-					var o = t.return;
-					throw (void 0 !== o && r(o.call(t)), e);
-				}
-			};
-		},
-		function(t, e, n) {
-			var r = n(13),
-				i = n(0)("iterator"),
-				o = Array.prototype;
-			t.exports = function(t) {
-				return void 0 !== t && (r.Array === t || o[i] === t);
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			var r = n(4),
-				i = n(11);
-			t.exports = function(t, e, n) {
-				e in t ? r.f(t, e, i(0, n)) : (t[e] = n);
-			};
-		},
-		function(t, e, n) {
-			var r = n(52),
-				i = n(0)("iterator"),
-				o = n(13);
-			t.exports = n(2).getIteratorMethod = function(t) {
-				if (void 0 != t) return t[i] || t["@@iterator"] || o[r(t)];
-			};
-		},
-		function(t, e, n) {
-			var r = n(22),
-				i = n(0)("toStringTag"),
-				o =
-					"Arguments" ==
-					r(
-						(function() {
-							return arguments;
-						})()
+		_calcLetters: function() {
+			var _self = this,
+				iteratorX = 0;
+
+			this.$letters.each(function(i) {
+				var $letter = $(this),
+					// calculate each letter's semi arc given the percentage of each letter on the original word.
+					dtArcLetter = ($letter.outerWidth(true) / _self.dtWord) * _self.dtArc,
+					// angle for the dtArcLetter given our radius.
+					beta = dtArcLetter / _self.options.radius,
+					// distance from the middle point of the semi arc's chord to the center of the circle.
+					// this is going to be the place where the letter will be positioned.
+					h = _self.options.radius * Math.cos(beta / 2),
+					// angle formed by the x-axis and the left most point of the chord.
+					alpha = Math.acos(
+						(_self.dtWord / 2 - iteratorX) / _self.options.radius
 					),
-				u = function(t, e) {
-					try {
-						return t[e];
-					} catch (t) {}
-				};
-			t.exports = function(t) {
-				var e, n, c;
-				return void 0 === t
-					? "Undefined"
-					: null === t
-					? "Null"
-					: "string" == typeof (n = u((e = Object(t)), i))
-					? n
-					: o
-					? r(e)
-					: "Object" == (c = r(e)) && "function" == typeof e.callee
-					? "Arguments"
-					: c;
-			};
-		},
-		function(t, e, n) {
-			var r = n(0)("iterator"),
-				i = !1;
-			try {
-				var o = [7][r]();
-				(o.return = function() {
-					i = !0;
-				}),
-					Array.from(o, function() {
-						throw 2;
-					});
-			} catch (t) {}
-			t.exports = function(t, e) {
-				if (!e && !i) return !1;
-				var n = !1;
-				try {
-					var o = [7],
-						u = o[r]();
-					(u.next = function() {
-						return { done: (n = !0) };
-					}),
-						(o[r] = function() {
-							return u;
-						}),
-						t(o);
-				} catch (t) {}
-				return n;
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			function r(t) {
-				return t && t.__esModule ? t : { default: t };
-			}
-			function i(t, e) {
-				if (!(t instanceof e))
-					throw new TypeError("Cannot call a class as a function");
-			}
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var o = (function() {
-					function t(t, e) {
-						for (var n = 0; n < e.length; n++) {
-							var r = e[n];
-							(r.enumerable = r.enumerable || !1),
-								(r.configurable = !0),
-								"value" in r && (r.writable = !0),
-								Object.defineProperty(t, r.key, r);
-						}
-					}
-					return function(e, n, r) {
-						return n && t(e.prototype, n), r && t(e, r), e;
-					};
-				})(),
-				u = n(55),
-				c = r(u),
-				f = n(56),
-				a = r(f),
-				s = n(57),
-				l = r(s),
-				p = n(58),
-				h = r(p),
-				d = n(59),
-				v = r(d),
-				y = Math.PI,
-				_ = Math.max,
-				m = Math.min,
-				g = (function() {
-					function t(e, n) {
-						i(this, t),
-							(this.element = e),
-							(this.originalHTML = this.element.innerHTML);
-						var r = document.createElement("div"),
-							o = document.createDocumentFragment();
-						r.setAttribute("aria-label", e.innerText),
-							(r.style.position = "relative"),
-							(this.container = r),
-							(this._letters = (0, a.default)(e, n)),
-							this._letters.forEach(function(t) {
-								return o.appendChild(t);
-							}),
-							r.appendChild(o),
-							(this.element.innerHTML = ""),
-							this.element.appendChild(r);
-						var u = window.getComputedStyle(this.element),
-							f = u.fontSize,
-							s = u.lineHeight;
-						(this._fontSize = parseFloat(f)),
-							(this._lineHeight = parseFloat(s) || this._fontSize),
-							(this._metrics = this._letters.map(c.default));
-						var l = this._metrics.reduce(function(t, e) {
-							return t + e.width;
-						}, 0);
-						(this._minRadius = l / y / 2 + this._lineHeight),
-							(this._dir = 1),
-							(this._forceWidth = !1),
-							(this._forceHeight = !0),
-							(this._radius = this._minRadius),
-							this._invalidate();
-					}
-					return (
-						o(t, [
-							{
-								key: "radius",
-								value: function(t) {
-									return void 0 !== t
-										? ((this._radius = _(this._minRadius, t)),
-										  this._invalidate(),
-										  this)
-										: this._radius;
-								}
-							},
-							{
-								key: "dir",
-								value: function(t) {
-									return void 0 !== t
-										? ((this._dir = t), this._invalidate(), this)
-										: this._dir;
-								}
-							},
-							{
-								key: "forceWidth",
-								value: function(t) {
-									return void 0 !== t
-										? ((this._forceWidth = t), this._invalidate(), this)
-										: this._forceWidth;
-								}
-							},
-							{
-								key: "forceHeight",
-								value: function(t) {
-									return void 0 !== t
-										? ((this._forceHeight = t), this._invalidate(), this)
-										: this._forceHeight;
-								}
-							},
-							{
-								key: "refresh",
-								value: function() {
-									return this._invalidate();
-								}
-							},
-							{
-								key: "destroy",
-								value: function() {
-									return (this.element.innerHTML = this.originalHTML), this;
-								}
-							},
-							{
-								key: "_invalidate",
-								value: function() {
-									var t = this;
-									return (
-										cancelAnimationFrame(this._raf),
-										(this._raf = requestAnimationFrame(function() {
-											t._layout();
-										})),
-										this
-									);
-								}
-							},
-							{
-								key: "_layout",
-								value: function() {
-									var t = this,
-										e = this._radius,
-										n = this._dir,
-										r = -1 === n ? -e + this._lineHeight : e,
-										i = "center " + r / this._fontSize + "em",
-										o = e - this._lineHeight,
-										u = (0, v.default)(this._metrics, o),
-										c = u.rotations,
-										f = u.θ;
-									if (
-										(this._letters.forEach(function(e, r) {
-											var o = e.style,
-												u = (-0.5 * f + c[r]) * n,
-												a = (-0.5 * t._metrics[r].width) / t._fontSize,
-												s = "translateX(" + a + "em) rotate(" + u + "deg)";
-											(o.position = "absolute"),
-												(o.bottom = -1 === n ? 0 : "auto"),
-												(o.left = "50%"),
-												(o.transform = s),
-												(o.transformOrigin = i),
-												(o.webkitTransform = s),
-												(o.webkitTransformOrigin = i);
-										}),
-										this._forceHeight)
-									) {
-										var a =
-											f > 180
-												? (0, l.default)(e, f)
-												: (0, l.default)(o, f) + this._lineHeight;
-										this.container.style.height = a / this._fontSize + "em";
-									}
-									if (this._forceWidth) {
-										var s = (0, h.default)(e, m(180, f));
-										this.container.style.width = s / this._fontSize + "em";
-									}
-									return this;
-								}
-							}
-						]),
-						t
-					);
-				})();
-			e.default = g;
-		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 }),
-				(e.default = function(t) {
-					var e = t.getBoundingClientRect();
-					return {
-						height: e.height,
-						left: e.left + window.pageXOffset,
-						top: e.top + window.pageYOffset,
-						width: e.width
-					};
+					// angle formed by the x-axis and the right most point of the chord.
+					theta = alpha + beta / 2,
+					// distances of the sides of the triangle formed by h and the orthogonal to the x-axis.
+					x = Math.cos(theta) * h,
+					y = Math.sin(theta) * h,
+					// the value for the coordinate x of the middle point of the chord.
+					xpos = iteratorX + Math.abs(_self.dtWord / 2 - x - iteratorX),
+					// finally, calculate how much to translate each letter, given its center point.
+					// also calculate the angle to rotate the letter accordingly.
+					xval = 0 | (xpos - $letter.data("center")),
+					yval = 0 | (_self.options.radius - y),
+					angle = _self.options.rotate
+						? 0 | (-Math.asin(x / _self.options.radius) * (180 / Math.PI))
+						: 0;
+
+				// the iteratorX will be positioned on the second point of each semi arc
+				iteratorX = 2 * xpos - iteratorX;
+
+				// save these values
+				$letter.data({
+					x: xval,
+					y: _self.options.dir === 1 ? yval : -yval,
+					a: _self.options.dir === 1 ? angle : -angle
 				});
+			});
 		},
-		function(t, e, n) {
-			"use strict";
-			function r(t) {
-				if (Array.isArray(t)) {
-					for (var e = 0, n = Array(t.length); e < t.length; e++) n[e] = t[e];
-					return n;
-				}
-				return Array.from(t);
-			}
-			Object.defineProperty(e, "__esModule", { value: !0 }),
-				(e.default = function(t, e) {
-					var n = document.createElement("span"),
-						i = t.innerText.trim();
-					return (e ? e(i) : [].concat(r(i))).map(function(t) {
-						var e = n.cloneNode();
-						return (
-							e.insertAdjacentHTML("afterbegin", " " === t ? "&nbsp;" : t), e
-						);
+		_rotateWord: function(animation) {
+			if (!this.$el.data("arctext")) return false;
+
+			var _self = this;
+
+			this.$letters.each(function(i) {
+				var $letter = $(this),
+					transformation =
+						_self.options.radius === -1
+							? "none"
+							: "translateX(" +
+							  $letter.data("x") +
+							  "px) translateY(" +
+							  $letter.data("y") +
+							  "px) rotate(" +
+							  $letter.data("a") +
+							  "deg)",
+					transition = animation
+						? "all " +
+						  (animation.speed || 0) +
+						  "ms " +
+						  (animation.easing || "linear")
+						: "none";
+
+				$letter
+					.css({
+						"-webkit-transition": transition,
+						"-moz-transition": transition,
+						"-o-transition": transition,
+						"-ms-transition": transition,
+						transition: transition
+					})
+					.css({
+						"-webkit-transform": transformation,
+						"-moz-transform": transformation,
+						"-o-transform": transformation,
+						"-ms-transform": transformation,
+						transform: transformation
 					});
+			});
+		},
+		_loadEvents: function() {
+			if (this.options.fitText) {
+				var _self = this;
+
+				$(window).on("resize.arctext", function() {
+					_self._calc();
+
+					// apply transformation.
+					_self._rotateWord();
 				});
+			}
 		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var r = n(28),
-				i = (function(t) {
-					return t && t.__esModule ? t : { default: t };
-				})(r);
-			e.default = function(t, e) {
-				return t * (1 - Math.cos((0, i.default)(e / 2)));
-			};
+		set: function(opts) {
+			if (!opts.radius && !opts.dir && opts.rotate === "undefined") {
+				return false;
+			}
+
+			this.options.radius = opts.radius || this.options.radius;
+			this.options.dir = opts.dir || this.options.dir;
+
+			if (opts.rotate !== undefined) {
+				this.options.rotate = opts.rotate;
+			}
+
+			this._calc();
+
+			this._rotateWord(opts.animation);
 		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var r = n(28),
-				i = (function(t) {
-					return t && t.__esModule ? t : { default: t };
-				})(r);
-			e.default = function(t, e) {
-				return 2 * t * Math.sin((0, i.default)(e / 2));
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var r = n(60),
-				i = (function(t) {
-					return t && t.__esModule ? t : { default: t };
-				})(r);
-			e.default = function(t, e) {
-				return t.reduce(
-					function(t, n) {
-						var r = n.width,
-							o = (0, i.default)(r / e);
-						return { θ: t.θ + o, rotations: t.rotations.concat([t.θ + o / 2]) };
-					},
-					{ θ: 0, rotations: [] }
-				);
-			};
-		},
-		function(t, e, n) {
-			"use strict";
-			Object.defineProperty(e, "__esModule", { value: !0 });
-			var r = 180 / Math.PI;
-			e.default = function(t) {
-				return t * r;
-			};
+		destroy: function() {
+			this.options.radius = -1;
+			this._rotateWord();
+			this.$letters.removeData("x y a center");
+			this.$el.removeData("arctext");
+			$(window).off(".arctext");
 		}
-	]);
-});
+	};
+
+	var logError = function(message) {
+		if (this.console) {
+			console.error(message);
+		}
+	};
+
+	$.fn.arctext = function(options) {
+		if (typeof options === "string") {
+			var args = Array.prototype.slice.call(arguments, 1);
+
+			this.each(function() {
+				var instance = $.data(this, "arctext");
+
+				if (!instance) {
+					logError(
+						"cannot call methods on arctext prior to initialization; " +
+							"attempted to call method '" +
+							options +
+							"'"
+					);
+					return;
+				}
+
+				if (!$.isFunction(instance[options]) || options.charAt(0) === "_") {
+					logError("no such method '" + options + "' for arctext instance");
+					return;
+				}
+
+				instance[options].apply(instance, args);
+			});
+		} else {
+			this.each(function() {
+				var instance = $.data(this, "arctext");
+				if (!instance) {
+					$.data(this, "arctext", new $.Arctext(options, this));
+				}
+			});
+		}
+
+		return this;
+	};
+})(jQuery);
 
 // Detectar Mobile
 function detectmob() {
@@ -7849,76 +7162,62 @@ var _gsScope =
 		"TweenMax"
 	);
 
-// var gsapClock = (function($) {
-// 	var s;
-// 	return {
-// 		settings: {
-// 			$minuteHand: $("#minute-hand"),
-// 			$hourHand: $("#hour-hand"),
-// 			$buttonTop: $("#button-top")
-// 		},
-// 		init: function() {
-// 			s = this.settings;
-// 			this.bindUIActions();
-// 		},
-// 		bindUIActions: function() {}
-// 	};
-// })(jQuery);
+var gsapClock = (function($) {
+	var s;
+	return {
+		settings: {
+			$minuteHand: $("#minute-hand"),
+			$hourHand: $("#hour-hand"),
+			$buttonTop: $("#button-top")
+		},
+		init: function() {
+			s = this.settings;
+			this.bindUIActions();
+		},
+		bindUIActions: function() {
+			var tl = new TimelineMax();
+			function buttonPress() {
+				TweenMax.to($("#button-top"), 0.1, {
+					y: 4
+				});
+				TweenMax.to($("#button-top"), 0.1, {
+					y: 0,
+					delay: 0.1
+				});
+			}
 
-var tl = new TimelineMax();
+			tl.add(
+				TweenMax.to($("#minute-hand"), 2, {
+					rotation: "360",
+					repeat: -1,
+					ease: Power0.easeNone,
+					transformOrigin: "50% 100%"
+				}),
+				TweenMax.to($("#hour-hand"), 48, {
+					rotation: "360",
+					repeat: -1,
+					ease: Power0.easeNone,
+					transformOrigin: "0% 50%"
+				})
+			);
+			tl.pause();
 
-//make it easier to play with the timing:
-var durations = { press: 0.1, minute: 2, hour: 48, pause: 2 };
+			function animationControll() {
+				buttonPress();
+				tl.resume();
+				setTimeout(function() {
+					buttonPress();
+					tl.pause();
+				}, 2000);
+			}
 
-//since we want to stop the hour hand motion each time the minute hand goes around, it's easiest to just put it in its own tween so we can pause()/resume(). This could easily be a timeline if you prefer.
-var hour = TweenMax.to("#hour-hand", durations.hour, {
-	rotation: 360,
-	repeat: -1,
-	ease: Power0.easeNone,
-	transformOrigin: "0% 50%"
-});
-
-//put the button press into its own repeating timeline
-var buttonPress = new TimelineMax({
-	repeat: -1,
-	repeatDelay: durations.minute - durations.press * 2
-});
-//when the button is fully depressed, pause the "hour" tween. We do a repeat:1, yoyo:true as a simple way to make the button return to its original position rather than using two tweens (down, then up)
-buttonPress.to($("#button-top"), durations.press, {
-	y: 4,
-	repeat: 1,
-	yoyo: true,
-	onRepeat: function() {
-		hour.pause();
-	}
-});
-
-//the 2nd time the button is depressed, resume() the hour timeline.
-buttonPress.to(
-	$("#button-top"),
-	durations.press,
-	{
-		y: 4,
-		repeat: 1,
-		yoyo: true,
-		onRepeat: function() {
-			hour.resume();
+			animationControll();
+			setInterval(function() {
+				animationControll();
+			}, 3500);
 		}
-	},
-	durations.pause
-);
-
-//main timeline - do the repeating minute hand animation that's repeated. Notice the repeatDelay is used for the appearance of pausing.
-tl.to($("#minute-hand"), durations.minute, {
-	rotation: "360",
-	repeat: -1,
-	repeatDelay: durations.pause,
-	ease: Power0.easeNone,
-	transformOrigin: "50% 100%"
-});
-
-//nest the buttonPress timeline at exactly the right spot.
-tl.add(buttonPress, durations.minute - durations.press);
+	};
+})(jQuery);
 
 var $widgetIsLoaded,
 	$workday = "";
@@ -7928,13 +7227,14 @@ var $svgClock =
 function widgetConstructor() {
 	var $cssMark =
 		"<!-- Css widget -->" +
+		'<link href="https://fonts.googleapis.com/css?family=Roboto:100,400&display=swap" rel="stylesheet">' +
 		'<link href="../Content/css/master.css" rel="stylesheet">';
 	var $markDown =
 		'<div class="ap-sis" style="display: none">' +
 		'<a href="#" class="ap-sis-btn ap-sis-cta--widget">' +
-		'<svg class="ap-sis-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.44 64.95"><defs><mask id="mask" x="-4.67" y="0" width="59" height="59.4" maskUnits="userSpaceOnUse"><g id="mask-2"><ellipse id="path-1" class="cls-1" cx="24.83" cy="29.7" rx="29.5" ry="29.7"/></g></mask></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><g id="stop-watch"><path class="cls-1" d="M28.72,9.51A26.72,26.72,0,1,1,2,36.23,26.75,26.75,0,0,1,28.72,9.51m0-2A28.72,28.72,0,1,0,57.44,36.23,28.72,28.72,0,0,0,28.72,7.51Z"/><g id="hands"><path id="hour-hand" class="cls-2" d="M43.63,36.3h0A1.64,1.64,0,0,1,42,37.94H30.42a1.63,1.63,0,0,1-1.64-1.64h0a1.63,1.63,0,0,1,1.64-1.64H42A1.64,1.64,0,0,1,43.63,36.3Z"/><rect id="minute-hand" class="cls-3" x="27.83" y="15.51" width="2" height="20.76" rx="1"/></g><g class="cls-4"><g id="circle"><ellipse id="middle-point" class="cls-3" cx="28.83" cy="36.3" rx="1.64" ry="1.65"/></g></g><g id="buttons"><path id="button-top" class="cls-2" d="M23.92,0h9.8a1.65,1.65,0,0,1,1.65,1.65h0A1.65,1.65,0,0,1,33.72,3.3h-9.8a1.65,1.65,0,0,1-1.65-1.65h0A1.65,1.65,0,0,1,23.92,0Z"/><path id="button-right" class="cls-2" d="M50.26,7.07l2.54,2A1.66,1.66,0,0,1,53,11.44h0a1.63,1.63,0,0,1-2.31.24l-2.55-2a1.66,1.66,0,0,1-.24-2.32h0A1.64,1.64,0,0,1,50.26,7.07Z"/></g><rect class="cls-5" x="50.45" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="3" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="26.83" y="11.83" width="3.99" height="1.36" rx="0.68" transform="translate(41.34 -16.31) rotate(90)"/><rect class="cls-5" x="26.83" y="59.27" width="3.99" height="1.36" rx="0.68" transform="translate(88.77 31.12) rotate(90)"/></g></g></g></svg>' +
+		'<svg class="ap-sis-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.44 64.95"><g id="stop-watch"><path class="cls-1" d="M28.72,9.51A26.72,26.72,0,1,1,2,36.23,26.75,26.75,0,0,1,28.72,9.51m0-2A28.72,28.72,0,1,0,57.44,36.23,28.72,28.72,0,0,0,28.72,7.51Z"/><g id="hands"><path id="hour-hand" class="cls-2" d="M43.63,36.3h0A1.64,1.64,0,0,1,42,37.94H30.42a1.63,1.63,0,0,1-1.64-1.64h0a1.63,1.63,0,0,1,1.64-1.64H42A1.64,1.64,0,0,1,43.63,36.3Z"/><rect id="minute-hand" class="cls-3" x="27.83" y="15.51" width="2" height="20.76" rx="1"/></g><g class="cls-4"><g id="circle"><ellipse id="middle-point" class="cls-3" cx="28.83" cy="36.3" rx="1.64" ry="1.65"/></g></g><g id="buttons"><path id="button-top" class="cls-2" d="M23.92,0h9.8a1.65,1.65,0,0,1,1.65,1.65h0A1.65,1.65,0,0,1,33.72,3.3h-9.8a1.65,1.65,0,0,1-1.65-1.65h0A1.65,1.65,0,0,1,23.92,0Z"/><path id="button-right" class="cls-2" d="M50.26,7.07l2.54,2A1.66,1.66,0,0,1,53,11.44h0a1.63,1.63,0,0,1-2.31.24l-2.55-2a1.66,1.66,0,0,1-.24-2.32h0A1.64,1.64,0,0,1,50.26,7.07Z"/></g><rect class="cls-5" x="50.45" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="3" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="26.83" y="11.83" width="3.99" height="1.36" rx="0.68" transform="translate(41.34 -16.31) rotate(90)"/><rect class="cls-5" x="26.83" y="59.27" width="3.99" height="1.36" rx="0.68" transform="translate(88.77 31.12) rotate(90)"/></g></svg>' +
+		'<div class="ap-sis-btn-txt" id="btn-tt">Calcula tu salida</div>' +
 		"</a>" +
-		// '<div class="ap-sis-btn-txt" id="btn-tt">Calcula tu salida</div>' +
 		'<aside class="ap-sis-widget">' +
 		'<header class="ap-sis-head">' +
 		'<div class="ap-sis-panel">' +
@@ -7943,17 +7243,20 @@ function widgetConstructor() {
 		'<use xlink:href="#logo-ia-white"></use>' +
 		"</svg>" +
 		"</h1>" +
-		'<h2 class="ap-sis-tt">Calcula tu salida Prro!</h2>' +
+		'<h2 class="ap-sis-tt">Calcula tu salida</h2>' +
 		"</div>" +
 		"</header>" +
 		'<section class="ap-sis-area">' +
-		'<div class="ap-sis-timeentry">' +
-		'<p class="ap-txt ap-txt-clock">Hora de entrada:</p>' +
-		'<p class="ap-txt ap-txt-clock-time ap-sis-time--in"></p>' +
+		'<div class="ap-sis-timeentry ap-sis-flx">' +
+		'<p class="ap-txt ap-txt-name"></p>' +
 		"</div>" +
 		'<div class="ap-sis-timeentry">' +
-		'<p class="ap-txt ap-txt-clock">Tu salida:</p>' +
-		'<p class="ap-txt ap-txt-clock-time ap-sis-time--out"></p>' +
+		'<p class="ap-txt ap-txt-clock"><span>Hora de entrada:</span></p>' +
+		'<p class="ap-txt ap-txt-clock-time ap-sis-time--in">08:30:00</p>' +
+		"</div>" +
+		'<div class="ap-sis-timeentry">' +
+		'<p class="ap-txt ap-txt-clock"><span>Tu salida:</span></p>' +
+		'<p class="ap-txt ap-txt-clock-time ap-sis-time--out">08:30:00</p>' +
 		"</div>" +
 		'<div class="ap-sis-timeiddle">' +
 		'<p class="ap-txt">¿Tiempo no registrable?</p>' +
@@ -7971,27 +7274,29 @@ function widgetConstructor() {
 
 function widgetRun($widgetIsLoaded) {
 	if ($widgetIsLoaded === true) {
+		var $usrSisname = $("#ctl00_cphContenido_lblNombre").text();
+
+		$(".ap-txt-name").html($usrSisname);
 		showButton();
 	}
 }
 
 function showButton() {
-	var $linkButton = $(".ap-sis-cta--widget"),
-		$usrSisname = $(".ctl00_cphContenido_lblNombre").html();
-
-	// new CircleType(document.getElementById("btn-tt")).dir(-1).radius(384);
 	setTimeout(function() {
 		$(".ap-sis").removeAttr("style");
-	}, 1000);
 
-	$linkButton.on("click", function(e) {
-		e.preventDefault();
-		animBasicEn(".ap-sis-widget", function() {
-			$(".ap-sis-time--in").html($usrSisEntry);
-			sumTime();
-			animBasicEn(".ap-sis-timeentry");
+		$("#btn-tt").arctext({ radius: 50, dir: 1 });
+
+		$tl = new TimelineMax();
+
+		$tl.to($(".ap-sis-btn"), 0.8, {
+			ease: Expo.easeIn,
+			x: 0,
+			opacity: 1
 		});
-	});
+
+		gsapClock.init();
+	}, 1000);
 }
 
 function workingTime() {
@@ -8014,24 +7319,24 @@ function animBasicEn(Class, callBack) {
 	var $el = Class,
 		$tl = new TimelineMax();
 	$.each($($el), function() {
-		$tl.to($(this), 0.2, {
-			ease: Expo.easeOut,
+		$tl.to($(this), 0.8, {
+			ease: Power3.easeOut,
 			y: 0,
 			opacity: 1,
 			onComplete: callBack
 		});
 	});
 }
-
-function animBasicOut(Class, callBack) {
+function animBasicEX(Class, callBack) {
 	var $el = Class,
 		$tl = new TimelineMax();
-
-	$tl.to($($el), 0.8, {
-		ease: Expo.easeIn,
-		y: 16,
-		opacity: 0,
-		onComplete: callBack
+	$.each($($el), function() {
+		$tl.to($(this), 0.3, {
+			ease: Back.easeOut,
+			x: 0,
+			opacity: 1,
+			onComplete: callBack
+		});
 	});
 }
 
@@ -8050,22 +7355,65 @@ function sumTime() {
 	}
 
 	function formatTime(seconds) {
-		return [
-			pad(Math.floor(seconds / 3600)),
-			pad(Math.floor(seconds / 60) % 60),
-			pad(seconds % 60)
-		].join(":");
+		var $hours = pad(Math.floor(seconds / 3600)),
+			$minutes = pad(Math.floor(seconds / 60) % 60),
+			$seconds = pad(seconds % 60),
+			$timearound = "";
+
+		if ($hours > 12) {
+			$hours = $hours - 12;
+
+			if ($hours == 12) {
+				$hours = $hours;
+				$timearound = " am";
+			} else {
+				$hours = $hours;
+				$timearound = " pm";
+			}
+		} else {
+			$timearound = " am";
+		}
+
+		return (
+			"<span class='ap-time'>" +
+			[$hours, $minutes, $seconds].join(":") +
+			"</span>" +
+			"<span class='ap-timearound'>" +
+			$timearound +
+			"</span>"
+		);
 	}
 
 	// Worktime
 	workingTime();
 
 	var $iddleTime = $usrSisEntry,
-		$wDay = $workday;
-
-	var $en = formatTime(timestrToSec($iddleTime) + timestrToSec($wDay));
+		$en = formatTime(timestrToSec($iddleTime) + timestrToSec($workday));
 
 	$(".ap-sis-time--out").html($en);
+}
+
+function showWidget() {
+	var $linkButton = $(".ap-sis-cta--widget");
+	$linkButton.on("click", function(e) {
+		e.preventDefault();
+
+		$(".ap-sis-time--in").html($usrSisEntry);
+		sumTime();
+
+		$tlW = new TimelineMax()
+			.to($(".ap-sis-widget"), 0.8, {
+				ease: Power3.easeOut,
+				y: 0,
+				opacity: 1,
+				onComplete: function() {
+					animBasicEX(".ap-sis-timeentry");
+				}
+			})
+			.reverse();
+
+		$tlW.reversed(!$tlW.reversed());
+	});
 }
 
 $(function() {
@@ -8074,4 +7422,5 @@ $(function() {
 
 $(document).ready(function() {
 	widgetRun($widgetIsLoaded);
+	showWidget();
 });

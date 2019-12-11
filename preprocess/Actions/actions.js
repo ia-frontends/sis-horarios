@@ -6,13 +6,14 @@ var $svgClock =
 function widgetConstructor() {
 	var $cssMark =
 		"<!-- Css widget -->" +
+		'<link href="https://fonts.googleapis.com/css?family=Roboto:100,400&display=swap" rel="stylesheet">' +
 		'<link href="../Content/css/master.css" rel="stylesheet">';
 	var $markDown =
 		'<div class="ap-sis" style="display: none">' +
 		'<a href="#" class="ap-sis-btn ap-sis-cta--widget">' +
-		'<svg class="ap-sis-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.44 64.95"><defs><mask id="mask" x="-4.67" y="0" width="59" height="59.4" maskUnits="userSpaceOnUse"><g id="mask-2"><ellipse id="path-1" class="cls-1" cx="24.83" cy="29.7" rx="29.5" ry="29.7"/></g></mask></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><g id="stop-watch"><path class="cls-1" d="M28.72,9.51A26.72,26.72,0,1,1,2,36.23,26.75,26.75,0,0,1,28.72,9.51m0-2A28.72,28.72,0,1,0,57.44,36.23,28.72,28.72,0,0,0,28.72,7.51Z"/><g id="hands"><path id="hour-hand" class="cls-2" d="M43.63,36.3h0A1.64,1.64,0,0,1,42,37.94H30.42a1.63,1.63,0,0,1-1.64-1.64h0a1.63,1.63,0,0,1,1.64-1.64H42A1.64,1.64,0,0,1,43.63,36.3Z"/><rect id="minute-hand" class="cls-3" x="27.83" y="15.51" width="2" height="20.76" rx="1"/></g><g class="cls-4"><g id="circle"><ellipse id="middle-point" class="cls-3" cx="28.83" cy="36.3" rx="1.64" ry="1.65"/></g></g><g id="buttons"><path id="button-top" class="cls-2" d="M23.92,0h9.8a1.65,1.65,0,0,1,1.65,1.65h0A1.65,1.65,0,0,1,33.72,3.3h-9.8a1.65,1.65,0,0,1-1.65-1.65h0A1.65,1.65,0,0,1,23.92,0Z"/><path id="button-right" class="cls-2" d="M50.26,7.07l2.54,2A1.66,1.66,0,0,1,53,11.44h0a1.63,1.63,0,0,1-2.31.24l-2.55-2a1.66,1.66,0,0,1-.24-2.32h0A1.64,1.64,0,0,1,50.26,7.07Z"/></g><rect class="cls-5" x="50.45" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="3" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="26.83" y="11.83" width="3.99" height="1.36" rx="0.68" transform="translate(41.34 -16.31) rotate(90)"/><rect class="cls-5" x="26.83" y="59.27" width="3.99" height="1.36" rx="0.68" transform="translate(88.77 31.12) rotate(90)"/></g></g></g></svg>' +
+		'<svg class="ap-sis-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.44 64.95"><g id="stop-watch"><path class="cls-1" d="M28.72,9.51A26.72,26.72,0,1,1,2,36.23,26.75,26.75,0,0,1,28.72,9.51m0-2A28.72,28.72,0,1,0,57.44,36.23,28.72,28.72,0,0,0,28.72,7.51Z"/><g id="hands"><path id="hour-hand" class="cls-2" d="M43.63,36.3h0A1.64,1.64,0,0,1,42,37.94H30.42a1.63,1.63,0,0,1-1.64-1.64h0a1.63,1.63,0,0,1,1.64-1.64H42A1.64,1.64,0,0,1,43.63,36.3Z"/><rect id="minute-hand" class="cls-3" x="27.83" y="15.51" width="2" height="20.76" rx="1"/></g><g class="cls-4"><g id="circle"><ellipse id="middle-point" class="cls-3" cx="28.83" cy="36.3" rx="1.64" ry="1.65"/></g></g><g id="buttons"><path id="button-top" class="cls-2" d="M23.92,0h9.8a1.65,1.65,0,0,1,1.65,1.65h0A1.65,1.65,0,0,1,33.72,3.3h-9.8a1.65,1.65,0,0,1-1.65-1.65h0A1.65,1.65,0,0,1,23.92,0Z"/><path id="button-right" class="cls-2" d="M50.26,7.07l2.54,2A1.66,1.66,0,0,1,53,11.44h0a1.63,1.63,0,0,1-2.31.24l-2.55-2a1.66,1.66,0,0,1-.24-2.32h0A1.64,1.64,0,0,1,50.26,7.07Z"/></g><rect class="cls-5" x="50.45" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="3" y="35.62" width="3.99" height="1.36" rx="0.68"/><rect class="cls-5" x="26.83" y="11.83" width="3.99" height="1.36" rx="0.68" transform="translate(41.34 -16.31) rotate(90)"/><rect class="cls-5" x="26.83" y="59.27" width="3.99" height="1.36" rx="0.68" transform="translate(88.77 31.12) rotate(90)"/></g></svg>' +
+		'<div class="ap-sis-btn-txt" id="btn-tt">Calcula tu salida</div>' +
 		"</a>" +
-		// '<div class="ap-sis-btn-txt" id="btn-tt">Calcula tu salida</div>' +
 		'<aside class="ap-sis-widget">' +
 		'<header class="ap-sis-head">' +
 		'<div class="ap-sis-panel">' +
@@ -21,17 +22,20 @@ function widgetConstructor() {
 		'<use xlink:href="#logo-ia-white"></use>' +
 		"</svg>" +
 		"</h1>" +
-		'<h2 class="ap-sis-tt">Calcula tu salida Prro!</h2>' +
+		'<h2 class="ap-sis-tt">Calcula tu salida</h2>' +
 		"</div>" +
 		"</header>" +
 		'<section class="ap-sis-area">' +
-		'<div class="ap-sis-timeentry">' +
-		'<p class="ap-txt ap-txt-clock">Hora de entrada:</p>' +
-		'<p class="ap-txt ap-txt-clock-time ap-sis-time--in"></p>' +
+		'<div class="ap-sis-timeentry ap-sis-flx">' +
+		'<p class="ap-txt ap-txt-name"></p>' +
 		"</div>" +
 		'<div class="ap-sis-timeentry">' +
-		'<p class="ap-txt ap-txt-clock">Tu salida:</p>' +
-		'<p class="ap-txt ap-txt-clock-time ap-sis-time--out"></p>' +
+		'<p class="ap-txt ap-txt-clock"><span>Hora de entrada:</span></p>' +
+		'<p class="ap-txt ap-txt-clock-time ap-sis-time--in">08:30:00</p>' +
+		"</div>" +
+		'<div class="ap-sis-timeentry">' +
+		'<p class="ap-txt ap-txt-clock"><span>Tu salida:</span></p>' +
+		'<p class="ap-txt ap-txt-clock-time ap-sis-time--out">08:30:00</p>' +
 		"</div>" +
 		'<div class="ap-sis-timeiddle">' +
 		'<p class="ap-txt">¿Tiempo no registrable?</p>' +
@@ -49,27 +53,29 @@ function widgetConstructor() {
 
 function widgetRun($widgetIsLoaded) {
 	if ($widgetIsLoaded === true) {
+		var $usrSisname = $("#ctl00_cphContenido_lblNombre").text();
+
+		$(".ap-txt-name").html($usrSisname);
 		showButton();
 	}
 }
 
 function showButton() {
-	var $linkButton = $(".ap-sis-cta--widget"),
-		$usrSisname = $(".ctl00_cphContenido_lblNombre").html();
-
-	// new CircleType(document.getElementById("btn-tt")).dir(-1).radius(384);
 	setTimeout(function() {
 		$(".ap-sis").removeAttr("style");
-	}, 1000);
 
-	$linkButton.on("click", function(e) {
-		e.preventDefault();
-		animBasicEn(".ap-sis-widget", function() {
-			$(".ap-sis-time--in").html($usrSisEntry);
-			sumTime();
-			animBasicEn(".ap-sis-timeentry");
+		$("#btn-tt").arctext({ radius: 50, dir: 1 });
+
+		$tl = new TimelineMax();
+
+		$tl.to($(".ap-sis-btn"), 0.8, {
+			ease: Expo.easeIn,
+			x: 0,
+			opacity: 1
 		});
-	});
+
+		gsapClock.init();
+	}, 1000);
 }
 
 function workingTime() {
@@ -92,24 +98,24 @@ function animBasicEn(Class, callBack) {
 	var $el = Class,
 		$tl = new TimelineMax();
 	$.each($($el), function() {
-		$tl.to($(this), 0.2, {
-			ease: Expo.easeOut,
+		$tl.to($(this), 0.8, {
+			ease: Power3.easeOut,
 			y: 0,
 			opacity: 1,
 			onComplete: callBack
 		});
 	});
 }
-
-function animBasicOut(Class, callBack) {
+function animBasicEX(Class, callBack) {
 	var $el = Class,
 		$tl = new TimelineMax();
-
-	$tl.to($($el), 0.8, {
-		ease: Expo.easeIn,
-		y: 16,
-		opacity: 0,
-		onComplete: callBack
+	$.each($($el), function() {
+		$tl.to($(this), 0.3, {
+			ease: Back.easeOut,
+			x: 0,
+			opacity: 1,
+			onComplete: callBack
+		});
 	});
 }
 
@@ -128,22 +134,65 @@ function sumTime() {
 	}
 
 	function formatTime(seconds) {
-		return [
-			pad(Math.floor(seconds / 3600)),
-			pad(Math.floor(seconds / 60) % 60),
-			pad(seconds % 60)
-		].join(":");
+		var $hours = pad(Math.floor(seconds / 3600)),
+			$minutes = pad(Math.floor(seconds / 60) % 60),
+			$seconds = pad(seconds % 60),
+			$timearound = "";
+
+		if ($hours > 12) {
+			$hours = $hours - 12;
+
+			if ($hours == 12) {
+				$hours = $hours;
+				$timearound = " am";
+			} else {
+				$hours = $hours;
+				$timearound = " pm";
+			}
+		} else {
+			$timearound = " am";
+		}
+
+		return (
+			"<span class='ap-time'>" +
+			[$hours, $minutes, $seconds].join(":") +
+			"</span>" +
+			"<span class='ap-timearound'>" +
+			$timearound +
+			"</span>"
+		);
 	}
 
 	// Worktime
 	workingTime();
 
 	var $iddleTime = $usrSisEntry,
-		$wDay = $workday;
-
-	var $en = formatTime(timestrToSec($iddleTime) + timestrToSec($wDay));
+		$en = formatTime(timestrToSec($iddleTime) + timestrToSec($workday));
 
 	$(".ap-sis-time--out").html($en);
+}
+
+function showWidget() {
+	var $linkButton = $(".ap-sis-cta--widget");
+	$linkButton.on("click", function(e) {
+		e.preventDefault();
+
+		$(".ap-sis-time--in").html($usrSisEntry);
+		sumTime();
+
+		$tlW = new TimelineMax()
+			.to($(".ap-sis-widget"), 0.8, {
+				ease: Power3.easeOut,
+				y: 0,
+				opacity: 1,
+				onComplete: function() {
+					animBasicEX(".ap-sis-timeentry");
+				}
+			})
+			.reverse();
+
+		$tlW.reversed(!$tlW.reversed());
+	});
 }
 
 $(function() {
@@ -152,4 +201,5 @@ $(function() {
 
 $(document).ready(function() {
 	widgetRun($widgetIsLoaded);
+	showWidget();
 });

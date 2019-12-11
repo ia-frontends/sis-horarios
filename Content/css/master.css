@@ -9,8 +9,9 @@
   font-size: 1.4em; }
 
 .ap-txt {
-  font-family: "Verdana", sans-serif;
-  font-weight: normal; }
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-weight: 100; }
   .ap-txt--strong {
     font-weight: bold; }
   .ap-txt--link {
@@ -230,14 +231,15 @@
 .palette-fontSubase {
   background: #2a2a2a; }
 
+* {
+  box-sizing: border-box;
+  outline: none; }
+
 body {
   overflow: hidden; }
 
 .ap-sis {
   overflow: hidden; }
-  .ap-sis * {
-    box-sizing: border-box;
-    outline: none; }
   .ap-sis p {
     margin: 0; }
   .ap-sis-clock {
@@ -256,24 +258,44 @@ body {
       fill: #5470b0; }
   .ap-sis-btn {
     width: 2em;
-    height: 2.4em;
+    height: 2.2em;
     display: block;
     position: absolute;
     bottom: 1em;
     right: 1em;
-    font-size: 1.6em;
+    font-size: 3.6em;
     border-radius: 10em;
-    padding: 8px;
+    -webkit-transform: translateX(130px);
+            transform: translateX(130px);
+    opacity: 0;
+    padding: 12px;
     box-shadow: 0 -0.8px 3.4px -19px rgba(0, 0, 0, 0.219), 0 1.4px 8.2px -19px rgba(0, 0, 0, 0.333), 0 7.8px 15.4px -19px rgba(0, 0, 0, 0.422), 0 20.3px 27.5px -19px rgba(0, 0, 0, 0.503), 0 43.1px 51.4px -19px rgba(0, 0, 0, 0.583), 0 92px 123px -19px rgba(0, 0, 0, 0.7); }
+    .ap-sis-btn-txt {
+      position: absolute;
+      display: block;
+      left: -16px;
+      right: -16px;
+      top: -8px;
+      bottom: -16px;
+      text-align: center; }
   .ap-sis-widget {
-    width: 32em;
+    width: 20em;
     position: absolute;
-    bottom: 1em;
-    right: 1em;
-    -webkit-transform: translateY(120%);
-            transform: translateY(120%);
+    bottom: 14.6em;
+    right: 6em;
+    -webkit-transform: translateY(500px);
+            transform: translateY(500px);
     opacity: 0;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02), 0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035), 0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05), 0 100px 80px rgba(0, 0, 0, 0.07); }
+    .ap-sis-widget:before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 25px solid #fff;
+      border-left: 25px solid transparent;
+      position: absolute;
+      bottom: -25px;
+      right: 1em; }
   .ap-sis-area {
     background-color: #fff;
     width: 100%;
@@ -282,5 +304,55 @@ body {
     display: none; }
   .ap-sis-timeentry {
     opacity: 0;
-    -webkit-transform: translateY(-16px);
-            transform: translateY(-16px); }
+    -webkit-transform: translateX(-16px);
+            transform: translateX(-16px); }
+  .ap-sis-time--out .ap-time {
+    font-size: 1em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100; }
+
+.ap-txt-clock {
+  text-align: center;
+  position: relative;
+  font-size: 16px; }
+  .ap-txt-clock:before {
+    content: "";
+    width: 65%;
+    height: 1px;
+    position: absolute;
+    background-color: #222;
+    left: 50%;
+    opacity: 0.2;
+    top: 50%;
+    z-index: -2;
+    margin-left: -72px;
+    margin-top: 1px; }
+  .ap-txt-clock span {
+    color: #222;
+    position: relative; }
+    .ap-txt-clock span:after {
+      content: "";
+      background-color: #fff;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      position: absolute;
+      z-index: -1; }
+  .ap-txt-clock-time {
+    font-size: 3em;
+    font-weight: 100;
+    text-align: center;
+    padding: 15px 0; }
+
+.ap-txt-name {
+  color: #0b3359;
+  font-weight: 400;
+  text-align: center;
+  font-size: 1.4em;
+  padding: 0 0 12px; }
+
+.ap-timearound {
+  position: relative;
+  top: -1.2em;
+  font-size: 0.4em; }
